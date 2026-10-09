@@ -94,6 +94,9 @@ input[type="range"]:disabled { opacity: .4; cursor: default; }
 .order-input::placeholder { color: var(--muted); opacity: 1; }
 textarea.order-input { resize: vertical; min-height: 76px; }
 .text-options { display: flex; align-items: start; justify-content: space-between; gap: 16px; margin-top: 12px; }
+.text-layout-picker { margin-top: 14px; }
+.text-layout-picker .design-field { margin-top: 18px; }
+.text-position-actions { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 12px; }
 #phrasePicker { flex: 1; min-width: 0; }
 #customTextCount { font-size: 11px; color: var(--muted); margin-top: 10px; white-space: nowrap; }
 .phrase-grid { display: grid; grid-template-columns: 1fr; gap: 6px; padding-top: 10px; }
@@ -216,4 +219,5 @@ body.order-modal-open { overflow: hidden; }
 @media (pointer: coarse) {
     .view-controls .pixel-button, .button-grid .pixel-button, .text-button, summary { min-height: 44px; }
     .quick-colors .color-button { width: 44px; height: 44px; }
+    .text-layout-picker input[type="range"] { min-height: 44px; }
 }

@@ -29,7 +29,8 @@
     <title>Make a T-shirt | Outside The World × frgmnts</title>
 
     <link rel="stylesheet" href="/assets/fonts/otw-fonts.css?v=20260722a" />
-    <link rel="stylesheet" href="/tshirt_builder.css?v=20261009-studio" />
+    <link rel="stylesheet" href="/assets/fonts/shirt-fonts.css?v=20261009" />
+    <link rel="stylesheet" href="/tshirt_builder.css?v=20261009-type" />
 </head>
 
 <body>
@@ -124,7 +125,25 @@
                         <details id="phrasePicker"><summary>Choose a phrase</summary><div class="phrase-grid" id="phraseGrid"></div></details>
                         <span id="customTextCount">0 / 80</span>
                     </div>
-                    <p class="sr-only" id="customTextHelp">Up to 80 characters per side. Your capitalization and line breaks are kept. Text sits beneath the graphic.</p>
+                    <p class="sr-only" id="customTextHelp">Up to 80 characters per side. Your capitalization and line breaks are kept. Each side keeps its own font, size, and position.</p>
+                    <label class="design-field" for="textFontInput"><span class="design-field__label">Typeface</span><select class="order-input" id="textFontInput">
+                        <option value="fira-code">Fira Code</option>
+                        <option value="inter">Inter</option>
+                        <option value="ibm-plex-sans">IBM Plex Sans</option>
+                        <option value="ibm-plex-mono">IBM Plex Mono</option>
+                        <option value="saira">Saira</option>
+                        <option value="fraunces">Fraunces</option>
+                        <option value="merriweather">Merriweather</option>
+                        <option value="ibm-plex-serif">IBM Plex Serif</option>
+                    </select></label>
+                    <details class="text-layout-picker" id="textLayoutPicker">
+                        <summary>Size &amp; position</summary>
+                        <label class="design-field" for="textSizeInput"><span class="design-field__label">Text size <output id="textSizeValue" for="textSizeInput">100%</output></span><input id="textSizeInput" type="range" min="60" max="160" step="5" value="100" /></label>
+                        <label class="design-field" for="textXInput"><span class="design-field__label">Left / right <output id="textXValue" for="textXInput">12.5% right</output></span><input id="textXInput" type="range" min="-25" max="25" step="0.5" value="12.5" aria-describedby="textPlacementHelp" /></label>
+                        <label class="design-field" for="textYInput"><span class="design-field__label">Higher / lower <output id="textYValue" for="textYInput">Default</output></span><input id="textYInput" type="range" min="-25" max="40" step="0.5" value="0" aria-describedby="textPlacementHelp" /></label>
+                        <div class="text-position-actions"><button class="text-button" id="centerTextButton" type="button">Center on shirt</button><button class="text-button" id="resetTextPositionButton" type="button">Reset position</button></div>
+                        <p class="tiny-truth" id="textPlacementHelp">Text stays inside the print area. Long lines shrink to fit.</p>
+                    </details>
                 </section>
 
                 <div class="action-stack">
@@ -526,6 +545,17 @@
                 frgmnts: BASE_PATH + "frgmnts_logo_2026.png"
             };
             var ART_OPTIONS = ["none", "brandmark", "full", "frgmnts"];
+            var TEXT_FONTS = {
+                "fira-code": { label: "Fira Code", family: '"Fira Code", monospace', weight: 700, tracking: 4 },
+                inter: { label: "Inter", family: '"Inter", sans-serif', weight: 700, tracking: 1 },
+                "ibm-plex-sans": { label: "IBM Plex Sans", family: '"IBM Plex Sans", sans-serif', weight: 700, tracking: 1 },
+                "ibm-plex-mono": { label: "IBM Plex Mono", family: '"IBM Plex Mono", monospace', weight: 600, tracking: 2 },
+                saira: { label: "Saira", family: '"Saira", sans-serif', weight: 700, tracking: 1 },
+                fraunces: { label: "Fraunces", family: '"Fraunces", serif', weight: 700, tracking: 0 },
+                merriweather: { label: "Merriweather", family: '"Merriweather", serif', weight: 700, tracking: 0 },
+                "ibm-plex-serif": { label: "IBM Plex Serif", family: '"IBM Plex Serif", serif', weight: 700, tracking: 0 }
+            };
+            var textFontCache = new Map();
 
             var SHIRT_COMBOS = [];
 
@@ -551,9 +581,7 @@
                     logoScaleFull: 0.40,
                     logoScaleMark: 0.38,
                     logoScaleFrgmnts: 0.32,
-                    sloganGap: 70,
-                    shirtCenterX: 1000,
-                    sloganXOffset: 30
+                    sloganGap: 70
                 }
             };
 
@@ -567,8 +595,10 @@
                 backArtSize: 100,
                 frontWordsOn: false,
                 frontSlogan: "",
+                frontTextStyle: { font: "fira-code", size: 100, x: 12.5, y: 0 },
                 wordsOn: true,
                 slogan: "THE ANALOG DAWN",
+                backTextStyle: { font: "fira-code", size: 100, x: 0, y: 0 },
                 locks: {
                     garment: false,
                     art: false,
@@ -609,6 +639,10 @@
             var customTextInput = document.getElementById("customTextInput");
             var customTextSide = document.getElementById("customTextSide");
             var customTextCount = document.getElementById("customTextCount");
+            var textFontInput = document.getElementById("textFontInput");
+            var textSizeInput = document.getElementById("textSizeInput");
+            var textXInput = document.getElementById("textXInput");
+            var textYInput = document.getElementById("textYInput");
             var phraseGrid = document.getElementById("phraseGrid");
             var colorGrid = document.getElementById("colorGrid");
             var quickColors = document.getElementById("quickColors");
@@ -657,8 +691,10 @@
                     backArtSize: normalizeArtSize(source.backArtSize),
                     frontWordsOn: Boolean(source.frontWordsOn),
                     frontSlogan: cleanCustomText(source.frontSlogan),
+                    frontTextStyle: normalizeTextStyle(source.frontTextStyle, "front"),
                     wordsOn: source.wordsOn,
                     slogan: cleanCustomText(source.slogan),
+                    backTextStyle: normalizeTextStyle(source.backTextStyle, "back"),
                     locks: {
                         garment: source.locks.garment,
                         art: source.locks.art,
@@ -694,6 +730,40 @@
                 return enabled ? cleanCustomText(side === "front" ? designState.frontSlogan : designState.slogan) : "";
             }
 
+            function normalizedNumber(value, fallback, min, max, step) {
+                if (value === null || value === undefined || value === "") return fallback;
+                var number = Number(value);
+                return Number.isFinite(number) ? Math.max(min, Math.min(max, Math.round(number / step) * step)) : fallback;
+            }
+
+            function normalizeTextStyle(value, side) {
+                var source = value || {};
+                return {
+                    font: Object.hasOwn(TEXT_FONTS, source.font) ? source.font : "fira-code",
+                    size: normalizedNumber(source.size, 100, 60, 160, 5),
+                    x: normalizedNumber(source.x, side === "front" ? 12.5 : 0, -25, 25, 0.5),
+                    y: normalizedNumber(source.y, 0, -25, 40, 0.5)
+                };
+            }
+
+            function textFontCSS(style, size) {
+                var font = TEXT_FONTS[style.font];
+                return font.weight + " " + size + "px " + font.family;
+            }
+
+            async function ensureTextFont(style) {
+                if (!textFontCache.has(style.font)) {
+                    textFontCache.set(style.font, document.fonts.load(textFontCSS(style, 32), "Aa").then(function (faces) {
+                        if (!faces.length) throw new Error("The selected typeface is unavailable.");
+                    }).catch(function (error) { textFontCache.delete(style.font); throw error; }));
+                }
+                await textFontCache.get(style.font);
+            }
+
+            function positionLabel(value, negative, positive, zero) {
+                return value === 0 ? zero : Math.abs(value) + "% " + (value < 0 ? negative : positive);
+            }
+
             function setSideText(side, value, enabled) {
                 if (side === "front") {
                     state.frontSlogan = cleanCustomText(value);
@@ -712,7 +782,9 @@
                     normalizeArtSize(designState.frontArtSize),
                     normalizeArtSize(designState.backArtSize),
                     sideText(designState, "front"),
-                    sideText(designState, "back")
+                    sideText(designState, "back"),
+                    JSON.stringify(normalizeTextStyle(designState.frontTextStyle, "front")),
+                    JSON.stringify(normalizeTextStyle(designState.backTextStyle, "back"))
                 ].join("|");
             }
 
@@ -815,6 +887,12 @@
                 params.set("frontWords", state.frontWordsOn ? state.frontSlogan : "");
                 params.set("words", state.wordsOn ? state.slogan : "off");
                 params.set("wordsOn", state.wordsOn ? "1" : "0");
+                ["front", "back"].forEach(function (side) {
+                    var style = state[side + "TextStyle"];
+                    ["font", "size", "x", "y"].forEach(function (key) {
+                        params.set(side + "Text" + titleCase(key), style[key]);
+                    });
+                });
                 history.replaceState(null, "", "#" + params.toString());
             }
 
@@ -836,6 +914,12 @@
                     if (ART_OPTIONS.includes(back)) state.backArt = back;
                     state.frontArtSize = normalizeArtSize(params.get("frontSize"));
                     state.backArtSize = normalizeArtSize(params.get("backSize"));
+                    ["front", "back"].forEach(function (side) {
+                        state[side + "TextStyle"] = normalizeTextStyle({
+                            font: params.get(side + "TextFont"), size: params.get(side + "TextSize"),
+                            x: params.get(side + "TextX"), y: params.get(side + "TextY")
+                        }, side);
+                    });
                     setSideText("front", params.get("frontWords"), Boolean(params.get("frontWords")));
                     if (params.get("wordsOn") === "0" || (words === "off" && params.get("wordsOn") !== "1")) {
                         state.wordsOn = false;
@@ -864,8 +948,10 @@
                         backArtSize: saved.backArtSize,
                         frontWordsOn: Boolean(saved.frontWordsOn),
                         frontSlogan: saved.frontSlogan,
+                        frontTextStyle: saved.frontTextStyle,
                         wordsOn: Boolean(saved.wordsOn),
                         slogan: cleanCustomText(saved.slogan || defaultState.slogan),
+                        backTextStyle: saved.backTextStyle,
                         locks: {
                             garment: false,
                             art: false,
@@ -997,6 +1083,16 @@
                     customTextInput.value = sideText(state, state.side);
                 }
                 customTextCount.textContent = customTextInput.value.length + " / 80";
+                var textStyle = state[state.side + "TextStyle"];
+                textFontInput.value = textStyle.font;
+                customTextInput.style.fontFamily = TEXT_FONTS[textStyle.font].family;
+                customTextInput.style.fontWeight = TEXT_FONTS[textStyle.font].weight;
+                textSizeInput.value = textStyle.size;
+                textXInput.value = textStyle.x;
+                textYInput.value = textStyle.y;
+                document.getElementById("textSizeValue").textContent = textStyle.size + "%";
+                document.getElementById("textXValue").textContent = positionLabel(textStyle.x, "left", "right", "Centered");
+                document.getElementById("textYValue").textContent = positionLabel(textStyle.y, "higher", "lower", "Default");
                 canvas.dataset.frontImage = shirtImagePath(state.color, state.style, "front");
                 canvas.dataset.backImage = shirtImagePath(state.color, state.style, "back");
                 canvas.setAttribute("aria-label", shirtPreviewAlt(state.color, state.style, state.side));
@@ -1060,35 +1156,21 @@
                 return null;
             }
 
-            function toPrintableLines(raw, maxLength) {
-                var clean = cleanCustomText(raw);
-                var limit = maxLength || 18;
-                if (!clean) return null;
-                if (clean.length <= limit) return [clean];
-
-                var words = clean.split(" ");
-                var best = null;
-                var bestDifference = Infinity;
-
-                for (var index = 1; index < words.length; index += 1) {
-                    var first = words.slice(0, index).join(" ");
-                    var second = words.slice(index).join(" ");
-                    if (first.length > limit || second.length > limit) continue;
-                    var difference = Math.abs(first.length - second.length);
-                    if (difference < bestDifference) {
-                        best = [first, second];
-                        bestDifference = difference;
-                    }
-                }
-
-                return best;
-            }
-
-            function measureTrackedWidth(targetContext, text, tracking) {
+            function trackedTextMetrics(targetContext, text, tracking) {
                 var characters = Array.from(text);
-                return characters.reduce(function (total, character) {
-                    return total + targetContext.measureText(character).width;
-                }, 0) + tracking * Math.max(0, characters.length - 1);
+                var cursor = 0, left = Infinity, right = -Infinity, ascent = 0, descent = 0;
+                characters.forEach(function (character) {
+                    var metric = targetContext.measureText(character);
+                    if (character.trim()) {
+                        left = Math.min(left, cursor - metric.actualBoundingBoxLeft);
+                        right = Math.max(right, cursor + metric.actualBoundingBoxRight);
+                        ascent = Math.max(ascent, metric.actualBoundingBoxAscent);
+                        descent = Math.max(descent, metric.actualBoundingBoxDescent);
+                    }
+                    cursor += metric.width + tracking;
+                });
+                if (left === Infinity) left = right = 0;
+                return { left: left, right: right, width: right - left, ascent: ascent, descent: descent };
             }
 
             function drawTrackedText(targetContext, text, x, y, tracking) {
@@ -1096,10 +1178,8 @@
                 var widths = characters.map(function (character) {
                     return targetContext.measureText(character).width;
                 });
-                var total = widths.reduce(function (sum, width) {
-                    return sum + width;
-                }, 0) + tracking * Math.max(0, characters.length - 1);
-                var currentX = x - total / 2;
+                var metric = trackedTextMetrics(targetContext, text, tracking);
+                var currentX = x - (metric.left + metric.right) / 2;
 
                 characters.forEach(function (character, index) {
                     targetContext.fillText(character, currentX, y);
@@ -1111,25 +1191,25 @@
                 return LIGHT_SHIRTS.has(designState.color) ? "#000000" : "#ffffff";
             }
 
-            function printableTextLines(text) {
+            function printableTextLines(text, targetContext, maxWidth, tracking) {
                 var lines = [];
                 text.split("\n").forEach(function (paragraph) {
-                    var balanced = toPrintableLines(paragraph, 18);
-                    if (balanced) {
-                        lines = lines.concat(balanced);
-                        return;
-                    }
                     var line = "";
-                    paragraph.split(" ").forEach(function (word) {
-                        var characters = Array.from(word);
-                        while (characters.length > 18) {
+                    paragraph.trim().split(" ").forEach(function (word) {
+                        if (trackedTextMetrics(targetContext, word, tracking).width > maxWidth) {
                             if (line) lines.push(line);
-                            lines.push(characters.splice(0, 18).join(""));
                             line = "";
+                            Array.from(word).forEach(function (character) {
+                                if (line && trackedTextMetrics(targetContext, line + character, tracking).width > maxWidth) {
+                                    lines.push(line);
+                                    line = "";
+                                }
+                                line += character;
+                            });
+                            return;
                         }
-                        word = characters.join("");
                         var next = line ? line + " " + word : word;
-                        if (Array.from(next).length > 18 && line) {
+                        if (line && trackedTextMetrics(targetContext, next, tracking).width > maxWidth) {
                             lines.push(line);
                             line = word;
                         } else {
@@ -1144,18 +1224,25 @@
             function sideTextLayout(targetContext, designState, side) {
                 var text = sideText(designState, side);
                 if (!text) return null;
-                var lines = printableTextLines(text);
-                var maxWidth = side === "front" ? 550 : 1480;
+                var style = normalizeTextStyle(designState[side + "TextStyle"], side);
+                var lines;
+                var maxWidth = side === "front" ? 550 : 1000;
                 var maxHeight = side === "front" ? 480 : 500;
-                var fontSize = side === "front" ? 44 : 68;
-                var tracking = Math.round(2000 * 0.002);
+                var fontSize = Math.round((side === "front" ? 44 : 68) * style.size / 100);
+                var tracking = TEXT_FONTS[style.font].tracking * style.size / 100;
+                targetContext.textAlign = "left";
+                targetContext.textBaseline = "middle";
+                var metrics, widest, ascent, descent, lineHeight;
 
                 while (fontSize >= 4) {
-                    targetContext.font = "700 " + fontSize + "px \"Fira Code\", monospace";
-                    var widest = Math.max.apply(null, lines.map(function (line) {
-                        return measureTrackedWidth(targetContext, line, tracking);
-                    }));
-                    if (widest <= maxWidth && lines.length * fontSize * 1.18 <= maxHeight) break;
+                    targetContext.font = textFontCSS(style, fontSize);
+                    lines = printableTextLines(text, targetContext, maxWidth, tracking);
+                    metrics = lines.map(function (line) { return trackedTextMetrics(targetContext, line, tracking); });
+                    widest = Math.max.apply(null, metrics.map(function (metric) { return metric.width; }));
+                    ascent = Math.max.apply(null, metrics.map(function (metric) { return metric.ascent; }));
+                    descent = Math.max.apply(null, metrics.map(function (metric) { return metric.descent; }));
+                    lineHeight = Math.max(fontSize * 1.18, ascent + descent + fontSize * 0.1);
+                    if (widest <= maxWidth && ascent + descent + (lines.length - 1) * lineHeight <= maxHeight) break;
                     fontSize -= 2;
                     tracking = Math.max(0, tracking - 1);
                 }
@@ -1163,8 +1250,23 @@
                 return {
                     lines: lines,
                     fontSize: fontSize,
+                    fontCSS: textFontCSS(style, fontSize),
+                    width: widest,
+                    ascent: ascent,
+                    descent: descent,
                     tracking: tracking,
-                    lineHeight: fontSize * 1.18
+                    lineHeight: lineHeight
+                };
+            }
+
+            function textPlacement(designState, side, layout, logoBottom) {
+                var style = normalizeTextStyle(designState[side + "TextStyle"], side);
+                var art = designState[side + "Art"];
+                var gap = side === "front" ? 40 : (art === "none" ? 50 : PLACEMENT.back.sloganGap);
+                var defaultY = logoBottom + gap + (layout.lines.length > 1 ? layout.lineHeight * 0.5 : 0);
+                return {
+                    centerX: Math.max(500 + layout.width / 2, Math.min(1500 - layout.width / 2, 1000 + style.x * 20)),
+                    baseY: Math.max(260 + layout.ascent, Math.min(1550 - layout.descent - (layout.lines.length - 1) * layout.lineHeight, defaultY + style.y * 20))
                 };
             }
 
@@ -1174,16 +1276,10 @@
                 var layout = sideTextLayout(measureContext, designState, side);
                 if (!layout) return null;
 
-                var textWidth = layout.lines.reduce(function (widest, line) {
-                    return Math.max(
-                        widest,
-                        measureTrackedWidth(measureContext, line, layout.tracking)
-                    );
-                }, 0);
                 var padding = Math.max(32, Math.round(layout.fontSize * 0.55));
-                var logicalWidth = Math.ceil(textWidth + padding * 2);
+                var logicalWidth = Math.ceil(layout.width + padding * 2);
                 var logicalHeight = Math.ceil(
-                    layout.fontSize + (layout.lines.length - 1) * layout.lineHeight + padding * 2
+                    layout.ascent + layout.descent + (layout.lines.length - 1) * layout.lineHeight + padding * 2
                 );
                 var productionScale = 4;
                 var artworkCanvas = document.createElement("canvas");
@@ -1194,10 +1290,10 @@
                 artworkContext.fillStyle = backTextColor(designState);
                 artworkContext.textAlign = "left";
                 artworkContext.textBaseline = "middle";
-                artworkContext.font = "700 " + layout.fontSize + "px \"Fira Code\", monospace";
+                artworkContext.font = layout.fontCSS;
 
                 var centerX = logicalWidth / 2;
-                var baseY = padding + layout.fontSize / 2;
+                var baseY = padding + layout.ascent;
                 layout.lines.forEach(function (line, index) {
                     drawTrackedText(
                         artworkContext,
@@ -1258,7 +1354,9 @@
                 var logoUrl = resolveLogoPath(art, source.color);
                 var shirtPromise = loadImage(shirtUrl);
                 var logoPromise = logoUrl ? loadArtworkAsImage(logoUrl) : Promise.resolve(null);
-                var assets = await Promise.all([shirtPromise, logoPromise]);
+                var assets = await Promise.all([shirtPromise, logoPromise,
+                    sideText(source, side) ? ensureTextFont(source[side + "TextStyle"]) : Promise.resolve()
+                ]);
                 var shirtImage = assets[0];
                 var logoImage = assets[1];
 
@@ -1292,18 +1390,14 @@
                         targetContext.fillStyle = backTextColor(source);
                         targetContext.textAlign = "left";
                         targetContext.textBaseline = "middle";
-                        var gap = side === "front" ? 40 : (art === "none" ? 50 : PLACEMENT.back.sloganGap);
-                        var baseY = logoBottom + gap +
-                            (textLayout.lines.length > 1 ? textLayout.lineHeight * 0.5 : 0);
-                        var centerX = side === "front" ? PLACEMENT.front.logoCenter.x
-                            : PLACEMENT.back.shirtCenterX + PLACEMENT.back.sloganXOffset;
+                        var position = textPlacement(source, side, textLayout, logoBottom);
 
                         textLayout.lines.forEach(function (line, index) {
                             drawTrackedText(
                                 targetContext,
                                 line,
-                                centerX,
-                                baseY + index * textLayout.lineHeight,
+                                position.centerX,
+                                position.baseY + index * textLayout.lineHeight,
                                 textLayout.tracking
                             );
                         });
@@ -1330,7 +1424,7 @@
                 } catch (error) {
                     if (revision !== renderRevision) return;
                     renderState.textContent = "Preview unavailable";
-                    setMessage("That shirt preview could not load. Please choose another color or try again.", "bad");
+                    setMessage("That preview could not load. Check your connection or choose another typeface or shirt color.", "bad");
                     console.error(error);
                 }
             }
@@ -1496,6 +1590,7 @@
                         (kind === "none" ? "" : " (" + placementDescription(side, kind).toLowerCase() + ")"));
                     var text = sideText(designState, side);
                     lines.push(text ? "Text:\n" + text : "Text: None");
+                    if (text) lines.push(textStyleDescription(designState, side));
                     lines.push("");
                 });
 
@@ -2237,8 +2332,16 @@
                 return ["front", "back"].map(function (side) {
                     return titleCase(side) + " graphic: " + artworkLabel(designState[side + "Art"]) +
                         " at " + normalizeArtSize(designState[side + "ArtSize"]) + "%\n" +
-                        titleCase(side) + " text: " + (sideText(designState, side) || "None");
+                        titleCase(side) + " text: " + (sideText(designState, side) || "None") +
+                        (sideText(designState, side) ? "\n" + textStyleDescription(designState, side) : "");
                 }).join("\n");
+            }
+
+            function textStyleDescription(designState, side) {
+                var style = normalizeTextStyle(designState[side + "TextStyle"], side);
+                return "Typeface: " + TEXT_FONTS[style.font].label + "; size: " + style.size + "%; " +
+                    positionLabel(style.x, "left", "right", "centered") + "; " +
+                    positionLabel(style.y, "higher", "lower", "default height") + ". Match the proof.";
             }
 
             async function openOrderModal() {
@@ -2495,6 +2598,28 @@
                 });
                 customTextInput.addEventListener("compositionend", function () {
                     setSideText(state.side, customTextInput.value, Boolean(cleanCustomText(customTextInput.value)));
+                    commit();
+                });
+
+                textFontInput.addEventListener("change", function () {
+                    state[state.side + "TextStyle"].font = textFontInput.value;
+                    commit();
+                });
+                [[textSizeInput, "size"], [textXInput, "x"], [textYInput, "y"]].forEach(function (entry) {
+                    entry[0].addEventListener("input", function () {
+                        state[state.side + "TextStyle"][entry[1]] = Number(entry[0].value);
+                        state[state.side + "TextStyle"] = normalizeTextStyle(state[state.side + "TextStyle"], state.side);
+                        commit();
+                    });
+                });
+                document.getElementById("centerTextButton").addEventListener("click", function () {
+                    state[state.side + "TextStyle"].x = 0;
+                    commit();
+                });
+                document.getElementById("resetTextPositionButton").addEventListener("click", function () {
+                    var defaults = normalizeTextStyle(null, state.side);
+                    state[state.side + "TextStyle"].x = defaults.x;
+                    state[state.side + "TextStyle"].y = defaults.y;
                     commit();
                 });
 
