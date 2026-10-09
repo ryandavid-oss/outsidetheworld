@@ -52,12 +52,22 @@ function pngInfo(bytes) {
     };
     await page.goto(base); await ready();
     assert.equal(await page.locator('[data-artwork]').count(), 5);
+    assert.equal(await page.locator('#stickerHeight').isVisible(), false, 'circles need only a diameter field');
+    assert.equal(await page.locator('#artworkScale').isVisible(), false, 'the largest artwork fit stays the default');
+    await page.locator('.scale-picker summary').focus();
+    await page.keyboard.press('Enter');
+    assert.equal(await page.locator('#artworkScale').isVisible(), true, 'manual sizing remains available from the keyboard');
+    await range('#artworkScale', 75);
+    assert.equal(await page.locator('#scaleValue').textContent(), '75%');
+    await page.locator('.scale-picker summary').click();
+    assert.equal(await page.locator('#svgUpload').isVisible(), false, 'custom uploads stay tucked away until needed');
     const catalog = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/products/stickers.json')));
     for (const entry of catalog) {
       await page.locator(`[data-artwork="${entry.id}"]`).click(); await ready();
       assert.equal(await page.locator('#designReadout').textContent(), entry.label);
       const shape = entry.id.includes('wordmark') ? 'rounded' : 'circle';
       assert.equal(await page.locator(`[data-shape="${shape}"]`).getAttribute('aria-pressed'), 'true', 'each artwork starts in its intended shape');
+      assert.equal(await page.locator('#stickerHeight').isVisible(), shape !== 'circle', 'height appears for rectangular stickers');
       assert.equal(await page.locator('#artworkScale').inputValue(), '100', 'artwork starts at the largest fit');
       assert.equal(await page.locator('[data-color="white"]').getAttribute('aria-pressed'), 'true');
       const svg = (await download('#exportSvg')).toString();
@@ -135,6 +145,8 @@ function pngInfo(bytes) {
     assert.equal(await page.locator('#exportPackage').isDisabled(), false);
 
     // Uploaded vectors stay local and are checked before they can replace the current artwork.
+    await page.locator('.upload-picker summary').click();
+    assert.equal(await page.locator('#svgUpload').isVisible(), true);
     await page.locator('#svgUpload').setInputFiles({ name: 'unsafe.svg', mimeType: 'image/svg+xml', buffer: Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><script>window.stickerInjected=true</script></svg>') });
     await page.waitForFunction(() => document.querySelector('#systemMessage').dataset.level === 'error');
     assert.equal(await page.evaluate(() => window.stickerInjected), undefined);

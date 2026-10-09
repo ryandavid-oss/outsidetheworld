@@ -3,108 +3,114 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="color-scheme" content="dark" />
-    <meta name="theme-color" content="#09090b" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#fbfaf7" />
     <title>Make a sticker | Outside The World × frgmnts</title>
-    <meta name="description" content="Pick your artwork, choose a shape, and make it yours. Preview and export your sticker." />
+    <meta name="description" content="Choose your artwork, shape, and size. Preview your sticker and download print files." />
     <link rel="canonical" href="https://outsidetheworld.com/sticker_builder.html" />
-    <link rel="stylesheet" href="/theme.css" />
     <link rel="stylesheet" href="/assets/fonts/otw-fonts.css?v=20260722a" />
-    <link rel="stylesheet" href="/sticker_builder.css?v=20261009b" />
+    <link rel="stylesheet" href="/sticker_builder.css?v=20261009-studio" />
     <script src="/sticker_builder.js?v=20261009b" defer></script>
 </head>
 <body>
     <main>
-        <header class="intro">
-            <div>
-                <p class="eyebrow">Outside The World × frgmnts</p>
-                <h1>Make a sticker</h1>
-                <p class="intro-copy">Pick your artwork. Give it a shape. Stick it somewhere good.</p>
-            </div>
-            <a class="brand" href="/index.html" aria-label="Return to Outside The World">
-                <img src="/Images/Equal.svg" alt="Outside The World" />
-            </a>
+        <header class="studio-header">
+            <a class="studio-brand" href="/index.html">Outside The World<span aria-hidden="true"></span></a>
+            <nav class="builder-nav" aria-label="Choose what to make">
+                <a href="/tshirt_builder.html">T-shirts</a>
+                <a href="/sticker_builder.html" aria-current="page">Stickers</a>
+            </nav>
         </header>
 
-        <nav class="builder-nav" aria-label="Choose what to make">
-            <a class="button button--quiet" href="/tshirt_builder.html">T-shirts</a>
-            <a class="button button--quiet" href="/sticker_builder.html" aria-current="page">Stickers</a>
-        </nav>
+        <section class="intro" aria-labelledby="page-title">
+            <div><p class="eyebrow">Objects for everyday life</p><h1 id="page-title">Make a sticker.</h1></div>
+            <p class="intro-copy">Your artwork, shape, and size.</p>
+        </section>
 
-        <div class="builder-grid">
-            <section class="panel preview-panel" aria-label="Sticker preview">
+        <div class="studio-grid">
+            <section class="preview-panel" aria-label="Sticker preview">
                 <div class="panel-bar">
-                    <span>YOUR STICKER</span>
+                    <span class="preview-label">Your sticker</span>
                     <span id="renderState" role="status">Loading artwork</span>
                 </div>
                 <div class="preview-stage">
                     <canvas id="stickerPreview" width="1200" height="1200" aria-label="Preview of your sticker"></canvas>
                 </div>
-                <dl class="preview-details">
-                    <div><dt>Design</dt><dd id="designReadout">—</dd></div>
-                    <div><dt>Size</dt><dd id="sizeReadout">3 in diameter</dd></div>
+                <dl class="product-caption">
+                    <div><dt class="sr-only">Design</dt><dd id="designReadout">—</dd></div>
+                    <div><dt class="sr-only">Size</dt><dd id="sizeReadout">3 in diameter</dd></div>
                 </dl>
-                <p class="hint preview-hint">Preview shows your design and border. Exports keep the background outside the sticker transparent.</p>
             </section>
 
-            <section class="panel controls-panel" aria-label="Sticker design controls">
+            <section class="controls-panel" aria-label="Sticker design controls">
                 <section class="control-section" aria-labelledby="artworkHeading">
-                    <h2 id="artworkHeading"><span class="step-number">1</span> Choose your artwork</h2>
+                    <div class="control-heading"><h2 id="artworkHeading">Artwork</h2></div>
                     <div class="artwork-grid" id="artworkGrid" aria-label="Sticker artwork"></div>
-                    <label class="field upload-field" for="svgUpload">
-                        <span>Or use your own SVG</span>
-                        <input id="svgUpload" type="file" accept=".svg,image/svg+xml" />
-                    </label>
+                    <details class="upload-picker">
+                        <summary>Use your own artwork</summary>
+                        <label class="field upload-field" for="svgUpload">
+                            <span class="sr-only">Upload SVG artwork</span>
+                            <input id="svgUpload" type="file" accept=".svg,image/svg+xml" aria-describedby="uploadHelp" />
+                        </label>
+                        <p class="hint" id="uploadHelp">Self-contained SVG, up to 2 MB. Your file stays on this device.</p>
+                    </details>
                 </section>
 
                 <section class="control-section" aria-labelledby="shapeHeading">
-                    <h2 id="shapeHeading"><span class="step-number">2</span> Shape and size</h2>
+                    <div class="control-heading"><h2 id="shapeHeading">Shape &amp; size</h2><span>Inches</span></div>
                     <div class="button-grid" aria-label="Sticker shape">
+                        <button class="button" type="button" data-shape="circle" aria-pressed="true">Circle</button>
                         <button class="button" type="button" data-shape="rounded" aria-pressed="false">Rounded</button>
                         <button class="button" type="button" data-shape="rectangle" aria-pressed="false">Rectangle</button>
-                        <button class="button" type="button" data-shape="circle" aria-pressed="true">Circle</button>
                     </div>
-                    <p class="hint">Marks start as circles. Long wordmarks use a rounded shape. Artwork fills the space inside your border.</p>
                     <div class="dimensions-grid">
                         <label class="field" for="stickerWidth"><span id="widthLabel">Diameter (inches)</span>
                             <input id="stickerWidth" type="number" min="0.75" max="8" step="0.01" value="3" inputmode="decimal" />
                         </label>
-                        <label class="field" for="stickerHeight">Height (inches)
+                        <label class="field height-field" for="stickerHeight">Height (inches)
                             <input id="stickerHeight" type="number" min="0.75" max="8" step="0.01" value="3" inputmode="decimal" disabled />
                         </label>
                     </div>
-                    <label class="field range-field" for="artworkScale">
-                        <span class="field-label">Artwork size <output id="scaleValue" for="artworkScale">100%</output></span>
-                        <input id="artworkScale" type="range" min="40" max="100" step="1" value="100" />
-                    </label>
-                    <label class="field range-field" for="borderSpacing">
-                        <span class="field-label">Border spacing <output id="borderValue" for="borderSpacing">0.12 in</output></span>
-                        <input id="borderSpacing" type="range" min="0.03" max="0.5" step="0.01" value="0.12" />
-                    </label>
-                    <div class="field">
-                        <span>Sticker color</span>
-                        <div class="button-grid" aria-label="Sticker background color">
-                            <button class="button color-button" type="button" data-color="white" aria-pressed="true"><span class="swatch swatch--white" aria-hidden="true"></span>White</button>
-                            <button class="button color-button" type="button" data-color="ink" aria-pressed="false"><span class="swatch swatch--ink" aria-hidden="true"></span>Ink</button>
-                        </div>
-                    </div>
                 </section>
 
-                <section class="control-section" aria-labelledby="exportHeading">
-                    <h2 id="exportHeading"><span class="step-number">3</span> Make it real</h2>
-                    <label class="field quantity-field" for="stickerQuantity">Quantity for the printer
+                <section class="control-section" aria-labelledby="borderHeading">
+                    <div class="control-heading"><h2 id="borderHeading">Border</h2></div>
+                    <div class="button-grid color-grid" aria-label="Sticker background color">
+                        <button class="button color-button" type="button" data-color="white" aria-pressed="true"><span class="swatch swatch--white" aria-hidden="true"></span>White</button>
+                        <button class="button color-button" type="button" data-color="ink" aria-pressed="false"><span class="swatch swatch--ink" aria-hidden="true"></span>Ink</button>
+                    </div>
+                    <label class="field range-field" for="borderSpacing">
+                        <span class="field-label">Border width <output id="borderValue" for="borderSpacing">0.12 in</output></span>
+                        <input id="borderSpacing" type="range" min="0.03" max="0.5" step="0.01" value="0.12" />
+                    </label>
+                    <details class="scale-picker">
+                        <summary>Adjust artwork size</summary>
+                        <label class="field range-field" for="artworkScale">
+                            <span class="field-label">Artwork size <output id="scaleValue" for="artworkScale">100%</output></span>
+                            <input id="artworkScale" type="range" min="40" max="100" step="1" value="100" />
+                        </label>
+                    </details>
+                </section>
+
+                <section class="print-section" aria-labelledby="exportHeading">
+                    <h2 class="sr-only" id="exportHeading">Print files</h2>
+                    <label class="field quantity-field" for="stickerQuantity"><span>Quantity</span>
                         <input id="stickerQuantity" type="number" min="1" max="10000" step="1" value="1" inputmode="numeric" />
                     </label>
                     <div class="export-actions">
-                        <button class="button button--primary" id="exportPackage" type="button" disabled>Export print package (.zip)</button>
-                        <button class="button" id="exportSvg" type="button" disabled>Download SVG</button>
-                        <button class="button" id="exportPng" type="button" disabled>Download PNG</button>
+                        <button class="button primary-button" id="exportPackage" type="button" disabled>Download print files <span aria-hidden="true">↓</span></button>
+                        <div class="individual-exports">
+                            <button class="text-button" id="exportSvg" type="button" disabled>SVG only</button>
+                            <button class="text-button" id="exportPng" type="button" disabled>PNG only</button>
+                        </div>
                     </div>
-                    <p class="hint">The package includes vector artwork, a PNG at 300 DPI, your original SVG, and a short printer note with size and quantity.</p>
+                    <p class="hint export-hint">Artwork and a short printer note, together in one ZIP.</p>
                 </section>
-                <p class="message" id="systemMessage" role="status" aria-live="polite">Choose a design to get started.</p>
+                <p class="system-message" id="systemMessage" role="status" aria-live="polite">Choose a design to get started.</p>
             </section>
         </div>
+
+        <footer class="studio-footer"><span>Outside The World × frgmnts</span><span>Made to print.</span></footer>
     </main>
 </body>
 </html>
