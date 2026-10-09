@@ -10,8 +10,8 @@
     <link rel="canonical" href="https://outsidetheworld.com/sticker_builder.html" />
     <link rel="stylesheet" href="/theme.css" />
     <link rel="stylesheet" href="/assets/fonts/otw-fonts.css?v=20260722a" />
-    <link rel="stylesheet" href="/sticker_builder.css" />
-    <script src="/sticker_builder.js" defer></script>
+    <link rel="stylesheet" href="/sticker_builder.css?v=20261009b" />
+    <script src="/sticker_builder.js?v=20261009b" defer></script>
 </head>
 <body>
     <main>
@@ -42,7 +42,7 @@
                 </div>
                 <dl class="preview-details">
                     <div><dt>Design</dt><dd id="designReadout">—</dd></div>
-                    <div><dt>Size</dt><dd id="sizeReadout">3 × 3 in</dd></div>
+                    <div><dt>Size</dt><dd id="sizeReadout">3 in diameter</dd></div>
                 </dl>
                 <p class="hint preview-hint">Preview shows your design and border. Exports keep the background outside the sticker transparent.</p>
             </section>
@@ -60,21 +60,22 @@
                 <section class="control-section" aria-labelledby="shapeHeading">
                     <h2 id="shapeHeading"><span class="step-number">2</span> Shape and size</h2>
                     <div class="button-grid" aria-label="Sticker shape">
-                        <button class="button" type="button" data-shape="rounded" aria-pressed="true">Rounded</button>
+                        <button class="button" type="button" data-shape="rounded" aria-pressed="false">Rounded</button>
                         <button class="button" type="button" data-shape="rectangle" aria-pressed="false">Rectangle</button>
-                        <button class="button" type="button" data-shape="circle" aria-pressed="false">Circle</button>
+                        <button class="button" type="button" data-shape="circle" aria-pressed="true">Circle</button>
                     </div>
+                    <p class="hint">Marks start as circles. Long wordmarks use a rounded shape. Artwork fills the space inside your border.</p>
                     <div class="dimensions-grid">
-                        <label class="field" for="stickerWidth"><span id="widthLabel">Width (inches)</span>
+                        <label class="field" for="stickerWidth"><span id="widthLabel">Diameter (inches)</span>
                             <input id="stickerWidth" type="number" min="0.75" max="8" step="0.01" value="3" inputmode="decimal" />
                         </label>
                         <label class="field" for="stickerHeight">Height (inches)
-                            <input id="stickerHeight" type="number" min="0.75" max="8" step="0.01" value="3" inputmode="decimal" />
+                            <input id="stickerHeight" type="number" min="0.75" max="8" step="0.01" value="3" inputmode="decimal" disabled />
                         </label>
                     </div>
                     <label class="field range-field" for="artworkScale">
-                        <span class="field-label">Artwork size <output id="scaleValue" for="artworkScale">85%</output></span>
-                        <input id="artworkScale" type="range" min="40" max="100" step="1" value="85" />
+                        <span class="field-label">Artwork size <output id="scaleValue" for="artworkScale">100%</output></span>
+                        <input id="artworkScale" type="range" min="40" max="100" step="1" value="100" />
                     </label>
                     <label class="field range-field" for="borderSpacing">
                         <span class="field-label">Border spacing <output id="borderValue" for="borderSpacing">0.12 in</output></span>

@@ -20,7 +20,7 @@ body {
 
 button, input { font: inherit; }
 button, a, input { -webkit-tap-highlight-color: transparent; }
-main { width: min(100% - 48px, 1440px); margin: 0 auto; padding: 48px 0 80px; }
+main { position: relative; z-index: 1; width: min(100% - 48px, 1440px); margin: 0 auto; padding: 48px 0 80px; }
 .intro { display: flex; align-items: center; justify-content: space-between; gap: 32px; margin-bottom: 32px; border-left: 6px solid var(--pink); padding-left: 24px; }
 .eyebrow { margin: 0 0 18px; color: var(--green); font: 700 .65rem "Fira Code", monospace; letter-spacing: .15em; text-transform: uppercase; }
 h1 { margin: 0; font-size: clamp(2.5rem, 5.3vw, 5.6rem); font-weight: 900; line-height: .95; letter-spacing: -.07em; text-transform: uppercase; text-shadow: 3px 3px 0 var(--blue), 6px 6px 0 #030305; }

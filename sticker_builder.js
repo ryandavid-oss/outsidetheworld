@@ -5,12 +5,13 @@
     var DPI = 300;
     var COLORS = { white: "#ffffff", ink: "#1a1c20" };
     var SHAPES = { rounded: "Rounded rectangle", rectangle: "Rectangle", circle: "Circle" };
-    var state = { artworkId: "", shape: "rounded", width: 3, height: 3, scale: 85, border: 0.12, color: "white", quantity: 1 };
+    var state = { artworkId: "", shape: "circle", width: 3, height: 3, scale: 100, border: 0.12, color: "white", quantity: 1 };
     var artwork = null;
     var artworkRevision = 0;
     var renderRevision = 0;
     var loading = false;
     var exporting = false;
+    var automaticHeight = false;
     var artworkCache = new Map();
     var preview = document.getElementById("stickerPreview");
     var previewContext = preview.getContext("2d");
@@ -51,6 +52,7 @@
         borderInput.max = maxBorder.toFixed(2);
         state.border = Math.min(state.border, Number(borderInput.max));
         borderInput.value = state.border;
+        scaleInput.value = state.scale;
         document.getElementById("borderValue").textContent = state.border.toFixed(2) + " in";
         document.getElementById("scaleValue").textContent = state.scale + "%";
         document.getElementById("designReadout").textContent = artwork ? artwork.label : "—";
@@ -113,7 +115,64 @@
         });
         root.setAttribute("viewBox", viewBox.join(" "));
         root.setAttribute("overflow", "hidden");
-        return { root: root, original: source, label: label, id: id, width: viewBox[2], height: viewBox[3] };
+        return { root: root, original: source, label: label, id: id, viewBox: viewBox, width: viewBox[2], height: viewBox[3] };
+    }
+
+    async function measureArtwork(design) {
+        // Measure visible artwork, including strokes, without flattening the vector export.
+        var sampleScale = 2048 / Math.max(design.width, design.height);
+        var canvas = document.createElement("canvas");
+        canvas.width = Math.max(1, Math.round(design.width * sampleScale));
+        canvas.height = Math.max(1, Math.round(design.height * sampleScale));
+        var sample = design.root.cloneNode(true);
+        sample.setAttribute("width", canvas.width);
+        sample.setAttribute("height", canvas.height);
+        var image = await svgImage(new XMLSerializer().serializeToString(sample));
+        var context = canvas.getContext("2d", { willReadFrequently: true });
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+        var pixels = context.getImageData(0, 0, canvas.width, canvas.height).data;
+        var left = canvas.width, right = -1, top = canvas.height, bottom = -1;
+        var edges = [];
+        for (var y = 0; y < canvas.height; y += 1) {
+            var rowLeft = canvas.width, rowRight = -1;
+            for (var x = 0; x < canvas.width; x += 1) {
+                if (pixels[(y * canvas.width + x) * 4 + 3] === 0) continue;
+                rowLeft = Math.min(rowLeft, x);
+                rowRight = x;
+            }
+            if (rowRight < 0) continue;
+            left = Math.min(left, rowLeft); right = Math.max(right, rowRight);
+            top = Math.min(top, y); bottom = y;
+            edges.push([rowLeft, y], [rowRight + 1, y + 1]);
+        }
+        if (right < 0) throw new Error("That SVG has no visible artwork. Choose another design.");
+        // One sampled pixel protects antialiased edges when tightening the viewBox.
+        left = Math.max(0, left - 1); top = Math.max(0, top - 1);
+        right = Math.min(canvas.width, right + 2); bottom = Math.min(canvas.height, bottom + 2);
+        var unitsX = design.width / canvas.width, unitsY = design.height / canvas.height;
+        var centerX = (left + right) / 2, centerY = (top + bottom) / 2;
+        var radius = 0;
+        edges.forEach(function (point) {
+            radius = Math.max(radius, Math.hypot((point[0] - centerX) * unitsX, (point[1] - centerY) * unitsY));
+        });
+        design.radius = radius + Math.hypot(unitsX, unitsY);
+        design.width = (right - left) * unitsX;
+        design.height = (bottom - top) * unitsY;
+        design.root.setAttribute("viewBox", [design.viewBox[0] + left * unitsX, design.viewBox[1] + top * unitsY, design.width, design.height].join(" "));
+        return design;
+    }
+
+    function fitHeight(design) {
+        state.height = Math.min(8, Math.max(0.75, Math.ceil(((state.width - state.border * 2) * design.height / design.width + state.border * 2) * 100) / 100));
+    }
+
+    function fitArtworkDefaults(design) {
+        state.shape = design.width / design.height > 2.5 ? "rounded" : "circle";
+        state.scale = 100;
+        state.color = "white";
+        automaticHeight = state.shape === "rounded";
+        if (automaticHeight) fitHeight(design);
+        else state.height = state.width;
     }
 
     function svgElement(name, attributes) {
@@ -143,7 +202,7 @@
         var availableWidth = width - padding * 2;
         var availableHeight = height - padding * 2;
         var fit = settings.shape === "circle"
-            ? availableWidth / Math.hypot(design.width, design.height)
+            ? (width / 2 - padding) / design.radius
             : Math.min(availableWidth / design.width, availableHeight / design.height);
         if (settings.shape === "rounded") {
             var radius = Math.min(width, height) * 0.12;
@@ -196,12 +255,7 @@
             previewContext.clearRect(0, 0, preview.width, preview.height);
             var fit = 960 / Math.max(composition.width, composition.height);
             var width = composition.width * fit, height = composition.height * fit;
-            previewContext.save();
-            previewContext.shadowColor = "rgba(0,0,0,.48)";
-            previewContext.shadowBlur = 38;
-            previewContext.shadowOffsetY = 18;
             previewContext.drawImage(image, (1200 - width) / 2, (1200 - height) / 2, width, height);
-            previewContext.restore();
             preview.setAttribute("aria-label", design.label + ", " + SHAPES[settings.shape].toLowerCase() + " sticker, " + settings.width + " by " + (settings.shape === "circle" ? settings.width : settings.height) + " inches");
             renderState.textContent = "Ready";
         } catch (error) {
@@ -221,12 +275,12 @@
             var design;
             if (file) {
                 if (file.size > 2000000) throw new Error("Choose an SVG smaller than 2 MB.");
-                design = prepareSvg(await file.text(), file.name.replace(/\.svg$/i, ""), "custom");
+                design = await measureArtwork(prepareSvg(await file.text(), file.name.replace(/\.svg$/i, ""), "custom"));
             } else {
                 if (!artworkCache.has(entry.id)) {
                     artworkCache.set(entry.id, fetch(entry.path).then(async function (response) {
                         if (!response.ok) throw new Error("That artwork could not be loaded. Try another design.");
-                        return prepareSvg(await response.text(), entry.label, entry.id);
+                        return measureArtwork(prepareSvg(await response.text(), entry.label, entry.id));
                     }).catch(function (error) { artworkCache.delete(entry.id); throw error; }));
                 }
                 design = await artworkCache.get(entry.id);
@@ -234,7 +288,7 @@
             if (revision !== artworkRevision) return;
             artwork = design;
             state.artworkId = design.id;
-            if (state.shape !== "circle") state.height = Math.min(8, Math.max(0.75, Math.round(state.width * design.height / design.width * 100) / 100));
+            fitArtworkDefaults(design);
             tell(design.label + " selected.");
         } catch (error) {
             if (revision !== artworkRevision) return;
@@ -382,6 +436,8 @@
             if (!validInputs()) { tell("Enter dimensions from 0.75 to 8 inches and a whole-number quantity from 1 to 10,000.", true); sync(); return; }
             state.width = Number(widthInput.value);
             if (state.shape !== "circle") state.height = Number(heightInput.value);
+            if (input === heightInput) automaticHeight = false;
+            if (input === widthInput && automaticHeight && artwork) fitHeight(artwork);
             state.quantity = Number(quantityInput.value);
             tell("Size and quantity updated.");
             sync(); render();
@@ -389,7 +445,11 @@
     });
     document.querySelectorAll("[data-shape], [data-color]").forEach(function (button) {
         button.addEventListener("click", function () {
-            if (button.dataset.shape) state.shape = button.dataset.shape;
+            if (button.dataset.shape) {
+                state.shape = button.dataset.shape;
+                automaticHeight = state.shape !== "circle";
+                if (automaticHeight && artwork) fitHeight(artwork);
+            }
             if (button.dataset.color) state.color = button.dataset.color;
             sync(); render();
         });
@@ -398,6 +458,7 @@
         input.addEventListener("input", function () {
             state.scale = Number(scaleInput.value);
             state.border = Number(borderInput.value);
+            if (input === borderInput && automaticHeight && artwork) fitHeight(artwork);
             sync(); render();
         });
     });

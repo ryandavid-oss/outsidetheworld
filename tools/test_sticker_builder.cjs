@@ -56,10 +56,40 @@ function pngInfo(bytes) {
     for (const entry of catalog) {
       await page.locator(`[data-artwork="${entry.id}"]`).click(); await ready();
       assert.equal(await page.locator('#designReadout').textContent(), entry.label);
+      const shape = entry.id.includes('wordmark') ? 'rounded' : 'circle';
+      assert.equal(await page.locator(`[data-shape="${shape}"]`).getAttribute('aria-pressed'), 'true', 'each artwork starts in its intended shape');
+      assert.equal(await page.locator('#artworkScale').inputValue(), '100', 'artwork starts at the largest fit');
+      assert.equal(await page.locator('[data-color="white"]').getAttribute('aria-pressed'), 'true');
       const svg = (await download('#exportSvg')).toString();
       const original = fs.readFileSync(path.join(__dirname, '..', entry.path), 'utf8');
       assert.equal((svg.match(/<path\b/g) || []).length, (original.match(/<path\b/g) || []).length, 'all vector paths survive export');
+      if (shape === 'circle') {
+        const coverage = await page.evaluate(async data => {
+          const image = new Image(); image.src = 'data:image/png;base64,' + data; await image.decode();
+          const canvas = document.createElement('canvas'); canvas.width = image.width; canvas.height = image.height;
+          const ctx = canvas.getContext('2d'); ctx.drawImage(image, 0, 0);
+          const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+          let radius = 0, left = canvas.width, right = 0;
+          for (let y = 0; y < canvas.height; y++) for (let x = 0; x < canvas.width; x++) {
+            const index = (y * canvas.width + x) * 4;
+            if (pixels[index + 3] < 250 || Math.min(pixels[index], pixels[index + 1], pixels[index + 2]) > 245) continue;
+            radius = Math.max(radius, Math.hypot(x + .5 - canvas.width / 2, y + .5 - canvas.height / 2));
+            left = Math.min(left, x); right = Math.max(right, x);
+          }
+          return { border: canvas.width / 2 - radius, width: right - left, size: canvas.width,
+            previewOutside: document.querySelector('#stickerPreview').getContext('2d').getImageData(600, 1090, 1, 1).data[3] };
+        }, (await download('#exportPng')).toString('base64'));
+        assert.ok(coverage.border >= 35 && coverage.border <= 39, 'the visible artwork fills the circle while retaining the selected white border');
+        if (entry.id.startsWith('otw-')) assert.ok(coverage.width / coverage.size > .9, 'round OTW artwork fills over 90% of the sticker diameter');
+        assert.equal(coverage.previewOutside, 0, 'the preview has no shadow outside the sticker');
+      }
+      if (shots) await page.locator('.preview-stage').screenshot({ path: `${shots}/${entry.id}.png` });
     }
+    await page.locator('#stickerWidth').fill('5'); await ready();
+    assert.ok(Number(await page.locator('#stickerHeight').inputValue()) > 1.35, 'wordmark height follows its width to keep the artwork large');
+    await range('#borderSpacing', .3);
+    assert.ok(Number(await page.locator('#stickerHeight').inputValue()) > 1.65, 'wordmark height accommodates the selected border');
+    await page.locator('#stickerWidth').fill('3'); await range('#borderSpacing', .12);
     await page.locator('[data-artwork="frgmnts-brandmark-light"]').click(); await ready();
     await page.locator('[data-shape="rectangle"]').click(); await ready();
     await page.locator('#stickerWidth').fill('2.5');
@@ -91,7 +121,7 @@ function pngInfo(bytes) {
     await page.locator('[data-color="ink"]').click(); await ready();
     assert.ok((await download('#exportSvg')).toString().includes('fill="#1a1c20"'));
     await page.locator('[data-shape="rounded"]').click(); await ready();
-    assert.ok((await download('#exportSvg')).toString().includes('rx="45"'));
+    assert.ok(/rx="[1-9][\d.]*"/.test((await download('#exportSvg')).toString()));
     if (shots) await page.screenshot({ path: `${shots}/desktop.png`, fullPage: true });
 
     await page.locator('#stickerWidth').fill('');
@@ -138,6 +168,6 @@ function pngInfo(bytes) {
     assert.ok(page.url().includes('tshirt_builder.html'));
     await page.getByRole('link', { name: 'Stickers', exact: true }).click(); await ready();
     assert.deepEqual(errors, []);
-    console.log('Five sticker SVGs, shapes, dimensions, border, 300 DPI exports, print ZIP, uploads, stale loads, and mobile layout: PASS');
+    console.log('Five sticker SVGs, default shapes, largest artwork fit, even white borders, shadow-free preview, 300 DPI exports, print ZIP, uploads, stale loads, and mobile layout: PASS');
   } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });
