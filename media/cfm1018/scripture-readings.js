@@ -177,6 +177,7 @@
 };
   const definitions = [
     ['isaiah61', 'Isaiah 61:1–3', 'ot/isa/61', 1, 3],
+    ['isaiah61-beauty', 'Isaiah 61:3', 'ot/isa/61', 3, 3],
     ['luke4-reading', 'Luke 4:16–21', 'nt/luke/4', 16, 21],
     ['luke4-fulfilled', 'Luke 4:21', 'nt/luke/4', 21, 21],
     ['luke4-response', 'Luke 4:22–27', 'nt/luke/4', 22, 27],

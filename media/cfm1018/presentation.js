@@ -18,6 +18,7 @@
   let currentId = deck.resolveId(location.hash);
   let pictureOnly = false;
   let controlsHidden = false;
+  let wordplayRevealed = false;
   let dialogFocusTarget = stage;
   const escape = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
   const currentSlide = () => deck.slides.find(slide => slide.id === currentId);
@@ -36,6 +37,16 @@
       body = `<header class="tv-lesson-heading" aria-label="Official Come, Follow Me lesson"><p class="tv-lesson-title">October 12–18: “The Redeemer Shall Come to Zion”</p><p class="tv-lesson-range">Isaiah 58–66</p></header><div class="slide-copy">${eyebrow}${title}<p class="slide-subtitle">${escape(slide.subtitle)}</p></div>${imageHTML(slide)}`;
     } else if (slide.type === 'scripture') {
       body = `${eyebrow}${title}<blockquote class="scripture-lines">${slide.lines.map(line => `<p>${escape(line)}</p>`).join('')}</blockquote>${sourceHTML(slide)}`;
+    } else if (slide.type === 'wordplay') {
+      body = `<header class="wordplay-heading">${eyebrow}${title}</header>
+        <div class="wordplay-pair${wordplayRevealed ? ' is-revealed' : ''}">
+          <figure class="word-card word-ashes"><figcaption><p class="word-english">Ashes</p><p class="hebrew word-hebrew" lang="he" dir="rtl"><span class="letter-aleph">אֵ</span><span class="letter-pe">פֶ</span><span>ר</span></p><p class="word-pronunciation">’ēper <span>· eh-fer</span></p><p class="word-meaning">Ashes on the head.<br>A sign of mourning.</p></figcaption><div class="word-portrait"><img src="${escape(slide.artwork)}" width="1536" height="1024" alt="An imagined mourner with ashes scattered on his uncovered head."></div></figure>
+          ${wordplayRevealed ? `<figure class="word-card word-beauty"><figcaption><p class="word-english">Beauty</p><p class="hebrew word-hebrew" lang="he" dir="rtl"><span class="letter-pe">פְּ</span><span class="letter-aleph">אֵ</span><span>ר</span></p><p class="word-pronunciation">pə’ēr <span>· peh-air</span></p><p class="word-meaning">A festive headdress.<br>A sign of honor and joy.</p></figcaption><div class="word-portrait"><img src="${escape(slide.artwork)}" width="1536" height="1024" alt="The same imagined man wearing a cream linen festive head covering, his head gently raised."></div></figure>` : `<div class="word-promise"><p>What does God give<br>in its place?</p><button type="button" data-reveal-wordplay>Reveal the promise <span aria-hidden="true">→</span></button></div>`}
+        </div>
+        <div class="wordplay-reflection" aria-live="polite">${wordplayRevealed ? `<p class="wordplay-explanation">The same three Hebrew letters.<br><strong>The first two exchange places.</strong></p><p class="wordplay-question">${escape(slide.question)}</p>` : `<p class="wordplay-invitation">“To give unto them beauty for ashes.”</p>`}</div>
+        <div class="wordplay-actions">${readingLink(slide, 'Read Isaiah 61:3')}${wordplayRevealed ? '<button type="button" data-open-reflection>Linger here: the planting of the Lord <span aria-hidden="true">↗</span></button><button type="button" class="wordplay-replay" data-reset-wordplay>Show ashes again</button>' : ''}</div>`;
+    } else if (slide.type === 'reflection') {
+      body = `<div class="slide-copy">${eyebrow}${title}<p class="reflection-question">${escape(slide.body)}</p>${sourceHTML(slide)}<button type="button" class="reflection-return" data-return-wordplay>Back to beauty for ashes <span aria-hidden="true">↩</span></button></div>${imageHTML(slide)}`;
     } else if (slide.type === 'declaration') {
       body = `<div class="slide-copy">${eyebrow}<h1 class="sr-only" id="slide-title">Jesus’ declaration</h1><blockquote class="declaration-quote">“${escape(slide.quote)}”</blockquote>${sourceHTML(slide)}</div>${imageHTML(slide)}`;
     } else if (slide.type === 'question') {
@@ -52,6 +63,7 @@
     document.body.classList.toggle('picture-only', pictureOnly && Boolean(slide.image));
     byId('previous-slide').disabled = currentId === deck.slides[0].id;
     byId('next-slide').disabled = currentId === deck.slides[deck.slides.length - 1].id;
+    byId('next-slide').innerHTML = `${slide.type === 'wordplay' && !wordplayRevealed ? 'Reveal' : 'Next'} <span aria-hidden="true">→</span>`;
     byId('image-only').hidden = !slide.image;
     byId('image-only').setAttribute('aria-pressed', String(pictureOnly && Boolean(slide.image)));
     byId('image-only').textContent = pictureOnly ? 'Show words' : 'Picture only';
@@ -65,6 +77,7 @@
   }
   function goTo(value, push = true) {
     currentId = deck.resolveId(value);
+    if (currentId === 'planted') wordplayRevealed = true;
     pictureOnly = false;
     dialogFocusTarget = stage;
     if (menu.open) menu.close();
@@ -78,8 +91,15 @@
     window.scrollTo(0, 0);
   }
   function move(direction) {
+    if (currentSlide().type === 'wordplay' && ((direction > 0 && !wordplayRevealed) || (direction < 0 && wordplayRevealed))) {
+      revealWordplay(direction > 0);return;
+    }
     const target = deck.nextId(currentId, direction);
     if (target !== currentId) goTo(target);
+  }
+  function revealWordplay(revealed) {
+    wordplayRevealed = revealed;render();stage.focus({preventScroll:true});
+    status.textContent = revealed ? 'Beauty for ashes. The same three Hebrew letters; the first two exchange places.' : 'Ashes. A sign of mourning. Reveal the promise when you are ready.';
   }
   function togglePicture() {
     if (!currentSlide().image) return;
@@ -197,6 +217,10 @@
     if (button) goTo(button.dataset.slideId);
   });
   stage.addEventListener('click', event => {
+    if (event.target.closest('[data-reveal-wordplay]')) {revealWordplay(true);return;}
+    if (event.target.closest('[data-reset-wordplay]')) {revealWordplay(false);return;}
+    if (event.target.closest('[data-open-reflection]')) {goTo('planted');return;}
+    if (event.target.closest('[data-return-wordplay]')) {goTo('beauty-for-ashes');return;}
     const link = event.target.closest('[data-reading]');
     if (link && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey && openReading(link.dataset.reading, link)) {event.preventDefault();return;}
     if (!event.target.closest('[data-another-question]')) return;
@@ -234,7 +258,7 @@
   });
   try {history.replaceState(null, '', `#${currentId}`);} catch {}
   render();
-  for (const source of new Set(deck.slides.map(slide => slide.image).filter(Boolean))) {
+  for (const source of new Set(deck.slides.flatMap(slide => [slide.image, slide.artwork]).filter(Boolean))) {
     const picture = new Image();
     picture.src = source;
   }

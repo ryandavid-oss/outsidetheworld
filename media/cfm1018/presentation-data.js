@@ -17,6 +17,24 @@
       source: scripture('ot/isa', '61', 'p1-p3', 'p1')
     },
     {
+      id: 'beauty-for-ashes', group: 'mission', label: 'Beauty for ashes · the Hebrew wordplay', type: 'wordplay',
+      eyebrow: 'Isaiah 61:3 · A promise to those who mourn', title: 'Beauty for ashes.',
+      artwork: '/media/cfm1018/beauty-for-ashes.webp',
+      question: 'What does this picture help us understand about the kind of comfort Christ offers?',
+      reference: 'Read Isaiah 61:3 · KJV',
+      source: scripture('ot/isa', '61', 'p3', 'p3')
+    },
+    {
+      id: 'planted', group: 'mission', label: 'The planting of the Lord · optional', type: 'reflection', optional: true,
+      returnTo: 'beauty-for-ashes', continueTo: 'fulfilled',
+      eyebrow: 'Isaiah 61:3 · Linger here', title: '“trees of righteousness,\nthe planting of the LORD”',
+      body: 'Why might Isaiah describe restored people as something planted and growing?',
+      image: '/media/cfm1018/planting-of-the-lord.webp',
+      alt: 'A mature tree with a broad canopy and strong roots in a sunlit, stony landscape.',
+      reference: 'Read Isaiah 61:3 · KJV',
+      source: scripture('ot/isa', '61', 'p3', 'p3')
+    },
+    {
       id: 'fulfilled', group: 'mission', label: 'Jesus’ declaration', type: 'declaration',
       eyebrow: 'Luke 4:21',
       quote: 'This day is this scripture fulfilled in your ears.',
@@ -91,8 +109,11 @@
     return ids.has(candidate) ? candidate : 'opening';
   }
   function nextId(current, direction) {
-    const index = slides.findIndex(slide => slide.id === resolveId(current));
-    return slides[Math.max(0, Math.min(slides.length - 1, index + Math.sign(direction)))].id;
+    const slide = slides.find(item => item.id === resolveId(current));
+    if (slide.optional) return direction < 0 ? slide.returnTo : slide.continueTo;
+    const route = slides.filter(item => !item.optional);
+    const index = route.findIndex(item => item.id === slide.id);
+    return route[Math.max(0, Math.min(route.length - 1, index + Math.sign(direction)))].id;
   }
   function commandForKey(key, shiftKey = false) {
     if (['ArrowRight','ArrowDown','PageDown'].includes(key)) return 'next';

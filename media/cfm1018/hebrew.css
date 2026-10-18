@@ -1,0 +1,5 @@
+@font-face{font-family:'Frank Ruhl Libre';src:url('../../assets/fonts/frank-ruhl-libre-variable.ttf') format('truetype');font-weight:300 900;font-display:swap}
+.hebrew{font-family:'Frank Ruhl Libre','Times New Roman',serif;font-weight:500;letter-spacing:0;font-synthesis:none;unicode-bidi:isolate}
+.notes-wordplay{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:24px 0;padding:24px;border:1px solid var(--rule);background:var(--sheet)}.notes-wordplay>div+div{border-left:1px solid var(--rule);padding-left:24px}.notes-wordplay .hebrew{font-size:64px;line-height:1.35;margin:8px 0}.notes-wordplay p:last-child{margin-bottom:0}
+@media(max-width:500px){.notes-wordplay{gap:16px;padding:18px}.notes-wordplay>div+div{padding-left:16px}.notes-wordplay .hebrew{font-size:52px}}
+@media print{.notes-wordplay{break-inside:avoid;padding:12px}.notes-wordplay .hebrew{font-size:32pt}}
