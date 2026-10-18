@@ -23,7 +23,7 @@
     const title = slide.title ? `<h1 id="slide-title">${escape(slide.title)}</h1>` : '';
     let body = '';
     if (slide.type === 'opening') {
-      body = `<div class="slide-copy">${eyebrow}${title}<p class="slide-subtitle">${escape(slide.subtitle)}</p></div>${imageHTML(slide)}`;
+      body = `<header class="tv-lesson-heading" aria-label="Official Come, Follow Me lesson"><p class="tv-lesson-title">October 12–18: “The Redeemer Shall Come to Zion”</p><p class="tv-lesson-range">Isaiah 58–66</p></header><div class="slide-copy">${eyebrow}${title}<p class="slide-subtitle">${escape(slide.subtitle)}</p></div>${imageHTML(slide)}`;
     } else if (slide.type === 'scripture') {
       body = `${eyebrow}${title}<blockquote class="scripture-lines">${slide.lines.map(line => `<p>${escape(line)}</p>`).join('')}</blockquote>${sourceHTML(slide)}`;
     } else if (slide.type === 'declaration') {
