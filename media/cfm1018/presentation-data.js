@@ -27,7 +27,7 @@
     {
       id: 'question-mission', group: 'mission', label: 'Discuss His mission', type: 'question',
       eyebrow: 'Isaiah 61:1–3 · Luke 4:16–21',
-      questions: ['What do these promised actions help you understand about Jesus?', 'What would good news sound like to one of the people named in this passage?'],
+      questions: ['What do these promises help us understand about why we need Christ?', 'What would good news sound like to one of the people named in this passage?'],
       source: scripture('ot/isa', '61', 'p1-p3', 'p1')
     },
     {
