@@ -1,21 +1,31 @@
 (() => {
   'use strict';
   const deck = globalThis.LessonDeck;
+  const readings = globalThis.LessonReadings;
   if (!deck) return;
   const byId = id => document.getElementById(id);
   const stage = byId('slide-stage');
   const controls = byId('presentation-controls');
   const menu = byId('slide-menu');
   const help = byId('presentation-help');
+  const reader = byId('scripture-reader');
   const status = byId('presentation-status');
   const questionIndex = new Map();
+  const readingPositions = new Map();
+  const readingScales = [0.88, 1, 1.18];
+  const readingWordLimits = [96, 78, 58];
+  let readingKey = null, readingPages = [], readingPage = 0, readingSize = 1;
   let currentId = deck.resolveId(location.hash);
   let pictureOnly = false;
   let controlsHidden = false;
   let dialogFocusTarget = stage;
   const escape = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
   const currentSlide = () => deck.slides.find(slide => slide.id === currentId);
-  const sourceHTML = slide => slide.reference ? `<p class="slide-source">${slide.source ? `<a href="${escape(slide.source)}" target="_blank" rel="noopener">${escape(slide.reference)} ↗</a>` : escape(slide.reference)}</p>` : '';
+  const readingLink = (slide, label) => {
+    const passage = readings?.forSource(slide.source);
+    return `<a href="${escape(slide.source)}" target="_blank" rel="noopener"${passage ? ` data-reading="${escape(passage.key)}" aria-haspopup="dialog" aria-controls="scripture-reader"` : ''}>${escape(label)}${passage ? '' : ' ↗'}</a>`;
+  };
+  const sourceHTML = slide => slide.reference ? `<p class="slide-source">${slide.source ? readingLink(slide, slide.reference) : escape(slide.reference)}</p>` : '';
   const imageHTML = slide => `<figure class="slide-art"><img src="${escape(slide.image)}" width="1536" height="1024" alt="${escape(slide.alt)}" decoding="async" fetchpriority="high"></figure>`;
   function render() {
     const slide = currentSlide();
@@ -30,7 +40,7 @@
       body = `<div class="slide-copy">${eyebrow}<h1 class="sr-only" id="slide-title">Jesus’ declaration</h1><blockquote class="declaration-quote">“${escape(slide.quote)}”</blockquote>${sourceHTML(slide)}</div>${imageHTML(slide)}`;
     } else if (slide.type === 'question') {
       const index = questionIndex.get(slide.id) || 0;
-      body = `${eyebrow}<h1 id="slide-title">${escape(slide.questions[index])}</h1><div class="question-actions"><button type="button" data-another-question>${index === 0 ? 'A follow-up question' : 'Return to the first question'}</button><a href="${escape(slide.source)}" target="_blank" rel="noopener">Read the passage ↗</a></div>`;
+      body = `${eyebrow}<h1 id="slide-title">${escape(slide.questions[index])}</h1><div class="question-actions"><button type="button" data-another-question>${index === 0 ? 'A follow-up question' : 'Return to the first question'}</button>${readingLink(slide, 'Read the passage')}</div>`;
     } else if (slide.type === 'context') {
       body = `${eyebrow}${title}<blockquote class="context-quote">“${escape(slide.quote)}”</blockquote><p class="context-body">${escape(slide.body)}</p>${sourceHTML(slide)}`;
     } else if (slide.type === 'story') {
@@ -59,6 +69,7 @@
     dialogFocusTarget = stage;
     if (menu.open) menu.close();
     if (help.open) help.close();
+    if (reader.open) reader.close();
     if (push) {
       try {history.pushState(null, '', `#${currentId}`);} catch {location.hash = currentId;}
     }
@@ -108,9 +119,65 @@
     menu.showModal();
     menu.querySelector('[aria-current="true"]')?.focus();
   }
-  function returnFocus() {
-    if (!menu.open && !help.open) dialogFocusTarget.focus({preventScroll:true});
+  function currentReading() {
+    return readings?.passages.find(passage => passage.key === readingKey);
   }
+  function prepareReading(verseNumber) {
+    readingPages = readings.paginate(currentReading().verses, readingWordLimits[readingSize]);
+    const remembered = verseNumber ?? readingPositions.get(readingKey);
+    readingPage = Math.max(0, readingPages.findIndex(page => page.some(verse => verse.number === remembered)));
+  }
+  function renderReading() {
+    const passage = currentReading(), verses = readingPages[readingPage];
+    const first = verses[0].number, last = verses[verses.length - 1].number;
+    const locationLabel = first === last ? `Verse ${first}` : `Verses ${first}–${last}`;
+    byId('reader-title').textContent = passage.title;
+    byId('reader-passage').value = passage.key;
+    byId('reader-text').innerHTML = verses.map(verse => `<p class="reader-verse"><span class="reader-number" aria-label="Verse ${verse.number}">${verse.number}</span><span class="reader-verse-text">${escape(verse.text)}</span></p>`).join('');
+    byId('reader-location').textContent = locationLabel;
+    byId('reader-page-count').textContent = `${readingPage + 1} of ${readingPages.length}`;
+    byId('reader-source').href = passage.source;
+    byId('reader-source').setAttribute('aria-label', `Open ${passage.title} on the Church website`);
+    byId('reader-previous').disabled = readingPage === 0;
+    byId('reader-next').disabled = readingPage === readingPages.length - 1;
+    byId('reader-smaller').disabled = readingSize === 0;
+    byId('reader-larger').disabled = readingSize === readingScales.length - 1;
+    reader.style.setProperty('--reader-scale', readingScales[readingSize]);
+    byId('reader-body').scrollTop = 0;
+    readingPositions.set(readingKey, first);
+    byId('reader-status').textContent = `${passage.title}. ${locationLabel}. Page ${readingPage + 1} of ${readingPages.length}.`;
+  }
+  function openReading(key, trigger) {
+    if (!readings?.passages.some(passage => passage.key === key)) return false;
+    if (trigger) dialogFocusTarget = trigger;
+    readingKey = key;
+    prepareReading();renderReading();
+    if (!reader.open) reader.showModal();
+    document.body.classList.add('scripture-open');
+    byId('reader-body').focus({preventScroll:true});
+    return true;
+  }
+  function moveReading(direction) {
+    const next = Math.max(0, Math.min(readingPages.length - 1, readingPage + direction));
+    if (next !== readingPage) {readingPage = next;renderReading();}
+  }
+  function resizeReading(direction) {
+    const next = Math.max(0, Math.min(readingScales.length - 1, readingSize + direction));
+    if (next === readingSize) return;
+    const verse = readingPages[readingPage][0].number;
+    readingSize = next;prepareReading(verse);renderReading();
+  }
+  function returnFocus() {
+    if (!menu.open && !help.open && !reader.open) (dialogFocusTarget.isConnected ? dialogFocusTarget : stage).focus({preventScroll:true});
+  }
+  byId('reader-passage').innerHTML = (readings?.passages || []).map(passage => `<option value="${escape(passage.key)}">${escape(passage.title)}</option>`).join('');
+  byId('reader-passage').addEventListener('change', event => openReading(event.target.value));
+  byId('reader-previous').addEventListener('click', () => moveReading(-1));
+  byId('reader-next').addEventListener('click', () => moveReading(1));
+  byId('reader-smaller').addEventListener('click', () => resizeReading(-1));
+  byId('reader-larger').addEventListener('click', () => resizeReading(1));
+  reader.addEventListener('close', () => {document.body.classList.remove('scripture-open');returnFocus();});
+  reader.addEventListener('click', event => {if (event.target === reader) reader.close();});
   byId('menu-groups').innerHTML = deck.groups.map(group => `<section class="menu-group"><h3>${escape(group.title)}</h3>${deck.slides.filter(slide => slide.group === group.id).map(slide => `<button type="button" data-slide-id="${escape(slide.id)}">${escape(slide.label)}</button>`).join('')}</section>`).join('');
   byId('previous-slide').addEventListener('click', () => move(-1));
   byId('next-slide').addEventListener('click', () => move(1));
@@ -130,6 +197,8 @@
     if (button) goTo(button.dataset.slideId);
   });
   stage.addEventListener('click', event => {
+    const link = event.target.closest('[data-reading]');
+    if (link && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey && openReading(link.dataset.reading, link)) {event.preventDefault();return;}
     if (!event.target.closest('[data-another-question]')) return;
     const slide = currentSlide();
     questionIndex.set(slide.id, ((questionIndex.get(slide.id) || 0) + 1) % slide.questions.length);
@@ -140,6 +209,12 @@
     if (event.target.closest('input,textarea,select,[contenteditable="true"]')) return;
     if ([' ','Spacebar'].includes(event.key) && event.target.closest('button,a')) return;
     const command = deck.commandForKey(event.key, event.shiftKey);
+    if (reader.open) {
+      if (command === 'next' || command === 'previous') {event.preventDefault();moveReading(command === 'next' ? 1 : -1);}
+      else if (command === 'opening' || command === 'closing') {event.preventDefault();readingPage = command === 'opening' ? 0 : readingPages.length - 1;renderReading();}
+      else if (command === 'fullscreen') {event.preventDefault();toggleFullscreen();}
+      return;
+    }
     if (!command) return;
     if (command === 'escape' && !pictureOnly) return;
     event.preventDefault();

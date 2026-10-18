@@ -6,10 +6,11 @@
   <meta name="robots" content="noindex,nofollow">
   <meta name="theme-color" content="#f6f0e3">
   <title>What Jesus came to do — Sunday presentation</title>
-  <link rel="stylesheet" href="media/cfm1018/presentation.css?v=2">
+  <link rel="stylesheet" href="media/cfm1018/presentation.css?v=3">
   <link rel="preload" href="media/cfm1018/nazareth.webp" as="image">
   <script defer src="media/cfm1018/presentation-data.js?v=2"></script>
-  <script defer src="media/cfm1018/presentation.js?v=2"></script>
+  <script defer src="media/cfm1018/scripture-readings.js?v=1"></script>
+  <script defer src="media/cfm1018/presentation.js?v=3"></script>
   <meta name="description" content="A flexible Sunday lesson presentation for Isaiah 61 and Luke 4, with scripture, pictures, and discussion questions.">
   <link rel="canonical" href="https://outsidetheworld.com/cfm1018-present.html">
   <meta property="og:type" content="website">
@@ -44,9 +45,25 @@
   </dialog>
   <dialog class="help-dialog" id="presentation-help" aria-labelledby="presentation-help-title">
     <div class="menu-heading"><h2 id="presentation-help-title">Presentation controls</h2><button class="close-button" type="button" data-close-dialog aria-label="Close keyboard help">×</button></div>
-    <dl class="shortcut-list"><div><dt>→, ↓, Space, Page Down</dt><dd>Next screen</dd></div><div><dt>←, ↑, Shift + Space, Page Up</dt><dd>Previous screen</dd></div><div><dt>Home / End</dt><dd>Opening / Closing</dd></div><div><dt>M</dt><dd>Choose any screen</dd></div><div><dt>F</dt><dd>Enter or leave fullscreen</dd></div><div><dt>H</dt><dd>Hide or show the controls</dd></div><div><dt>I</dt><dd>Picture only, when a picture is available</dd></div><div><dt>Escape</dt><dd>Close a menu or return from picture-only view</dd></div></dl>
+    <dl class="shortcut-list"><div><dt>→, ↓, Space, Page Down</dt><dd>Next screen or scripture page</dd></div><div><dt>←, ↑, Shift + Space, Page Up</dt><dd>Previous screen or scripture page</dd></div><div><dt>Home / End</dt><dd>Opening / Closing, or first / last scripture page</dd></div><div><dt>M</dt><dd>Choose any screen</dd></div><div><dt>F</dt><dd>Enter or leave fullscreen</dd></div><div><dt>H</dt><dd>Hide or show the controls</dd></div><div><dt>I</dt><dd>Picture only, when a picture is available</dd></div><div><dt>Escape</dt><dd>Close a reading or menu, or return from picture-only view</dd></div></dl>
     <p class="menu-intro">A presentation remote with arrow or Page Up / Page Down keys will work. Screens stay put until you move them.</p>
   </dialog>
+  <dialog class="scripture-reader" id="scripture-reader" aria-labelledby="reader-title">
+    <div class="reader-shell">
+      <header class="reader-header">
+        <div class="reader-heading"><p class="reader-edition">Read together · King James Version</p><h2 id="reader-title">Scripture reading</h2></div>
+        <div class="reader-size" role="group" aria-label="Scripture text size"><button type="button" id="reader-smaller" aria-label="Smaller scripture text">A−</button><button type="button" id="reader-larger" aria-label="Larger scripture text">A+</button></div>
+        <button type="button" class="reader-close" data-close-dialog>Back to lesson <span aria-hidden="true">×</span></button>
+      </header>
+      <div class="reader-body" id="reader-body" tabindex="-1" aria-label="Scripture text"><div class="reader-text" id="reader-text"></div></div>
+      <footer class="reader-footer">
+        <div class="reader-progress"><p id="reader-location"></p><p id="reader-page-count"></p></div>
+        <div class="reader-navigation"><button type="button" id="reader-previous" aria-label="Previous scripture page">← Previous</button><button type="button" id="reader-next" aria-label="Next scripture page">Next →</button></div>
+        <div class="reader-reference-tools"><label class="sr-only" for="reader-passage">Choose a scripture reading</label><select id="reader-passage"></select><a id="reader-source" href="https://www.churchofjesuschrist.org/study/scriptures/ot/isa/61?lang=eng" target="_blank" rel="noopener">Open on Church website ↗</a></div>
+      </footer>
+    </div>
+  </dialog>
+  <p class="sr-only" id="reader-status" role="status" aria-live="polite"></p>
   <p class="sr-only" role="status" aria-live="polite" id="presentation-status"></p>
   <noscript><div class="no-script">Enable JavaScript for the slideshow, or <a href="cfm1018-teacher.html">open the teaching notes</a>.</div></noscript>
 </body>
