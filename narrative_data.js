@@ -1,5 +1,190 @@
 const current_narrative = [
     {
+        "title": "Let Me Wonder",
+        "date": "October 18, 2026",
+        "body": "_The heaven I imagine, and the questions I will never stop asking._\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-10-18-let-me-wonder-mvew7lje.jpg \"Chris and George\")\n\n**Oh, how I wish I could wake up naturally every morning,** and have time for the things I wish to do.**\u00a0**Today, I had an extraordinary need to clear my head before church. I had too much on my mind, and getting on the bike is usually the best way for me to find clarity. It had been a long week, an exhausting weekend, and there were a few disappointments I hadn\u2019t quite figured out what to do with.\n\nThe weather was precious. Clouds, no wind. 65\u00ba. All was well. My mind was racing in a good way; I can only describe it as a pile of toothpicks being shaken out of a canister with holes at the top. The harder I shake myself, the better the thoughts fall.\n\nThen, at mile six of 21,\u00a0_Black Hole Sun_ came on the radio.\n\nUnbidden, unwanted, and totally alarming, tears streamed down my cheeks, bested only by the wind on my face as I rode past the palo verde. The soundtrack to my teenage life, Chris Cornell, dead for nine years now. His voice still carries secrets into my soul.\n\nAnd then my mind, she played a nasty trick on me. With my eyes wide open, tears still flowing freely, and ever so grateful for a pair of dark sunglasses, I had a vision of heaven.\n\nNot the prescribed heaven. Not heaven as you might imagine it, or perhaps even want it. Not the spirit world, not the kingdoms of glory. No dominions, principalities, or concourses of angels in admiration of a loving deity.\n\nInstead, I pictured Chris Cornell**\u00a0**sitting on a stool, singing into a microphone, eyes closed. Next to him, another musical hero of mine emerges, seated at a grand piano, smiling gently as his fingers move across the keys.\n\nGeorge Winston. Gone for three years.\n\nChris and George. God, I miss them both.\n\nI don\u2019t know what they\u2019re playing. I don\u2019t care. But they are there, and they are creating something together. And it\u2019s probably not perfect, but it\u2019s improvisational, and it\u2019s moving both of them.\u00a0And it\u2019s moving me to fresh tears.\n\nSimply enjoying each other\u2019s company. I see my mom and my brother there, and even though our mortal lives together were tangled in trauma, blood, and bitter words, maybe they walked by Chris and George and felt a bit of peace. Familial peace. A bit of emotion that transcends whatever veil rests between us.\u00a0Their presence doesn't undo what happened. Nor does it have to. Maybe there's just a little peace to be found in that moment. Because heaven or earth, healing goes on.\n\nWe talk a lot about the legacies people leave behind. My mom and brother left theirs. I will surely deal with that one in due time.\n\nChris and George? There\u2019s something comforting about knowing their work survives them. I can listen to _Autumn_ or _December_\u00a0or _Montana_ whenever I want. (Please, just ask my wife. I play it all the damn time)\n\nBut their recordings are finite.\n\nThere are songs Chris never wrote. Melodies George never discovered. Ideas that hadn\u2019t yet occurred to either of them when their lives ended.\u00a0And we\u2019ll never hear them.\u00a0That bothers me more than I know how to articulate.\n\nI don\u2019t know what happens when we die. I\u2019m increasingly uncomfortable with people who claim to know with certainty. I have faith that guides me, hope that sustains me, and spiritual witness that buoys me. I also have questions, doubts, and experiences that don\u2019t always fit together particularly well.\n\nI would like there to be more.\u00a0Not necessarily more work or more responsibilities. I don\u2019t want more things to prove.\n\nJust more _possibility_.\n\nMore time to understand and discover. To make something beautiful, without any particular obligation to do so.\n\nMaybe that\u2019s why I envisioned that imaginary stage.\u00a0I don\u2019t need Chris and George to perform for anybody. I don\u2019t need them to produce another masterpiece.\n\nI just see them having the opportunity.\n\nPS, and this is a heavy postscript. If reading these words caused any amount of fear to swell within your soul, I need you to pause. Take a measured step back, and remember who I am. It will never be your responsibility, dear reader, to render precaution or persuasion as the primary volley. These are just cautious musings, carefully meted out at 11:26pm after a heavy week of mental arithmetic. Carry on. I know I will.",
+        "file": "2026-10-18-let-me-wonder.md",
+        "publisher": {
+            "schema": "otw.publisher.post",
+            "version": 2,
+            "source": "publisher.html",
+            "subhead": "The heaven I imagine, and the questions I will never stop asking.",
+            "blocks": [
+                {
+                    "id": "image_mvew7ktg_l2vpnj",
+                    "type": "image",
+                    "imageRef": "image_mvew7ktg_l2vpnj",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-10-18-let-me-wonder-mvew7lje.jpg",
+                    "objectKey": "narrative/2026-10-18-let-me-wonder-mvew7lje.jpg",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                },
+                {
+                    "id": "p_mvew7ktu_qyy1te",
+                    "type": "paragraph",
+                    "html": "<span><b>Oh, how I wish I could wake up naturally every morning,</b> and have time for the things I wish to do.<b>\u00a0</b></span><span>Today, I had an extraordinary need to clear my head before church. I had too much on my mind, and getting on the bike is usually the best way for me to find clarity. It had been a long week, an exhausting weekend, and there were a few disappointments I hadn\u2019t quite figured out what to do with.</span>",
+                    "text": "Oh, how I wish I could wake up naturally every morning, and have time for the things I wish to do.\u00a0Today, I had an extraordinary need to clear my head before church. I had too much on my mind, and getting on the bike is usually the best way for me to find clarity. It had been a long week, an exhausting weekend, and there were a few disappointments I hadn\u2019t quite figured out what to do with."
+                },
+                {
+                    "id": "paragraph_mvewaau8_aqpv9j",
+                    "type": "paragraph",
+                    "html": "<span style=\"font-weight: normal; font-style: normal\">The weather was precious. Clouds, no wind. 65\u00ba. All was well. My mind was racing in a good way; I can only describe it as a pile of toothpicks being shaken out of a canister with holes at the top. The harder I shake myself, the better the thoughts fall.</span>",
+                    "text": "The weather was precious. Clouds, no wind. 65\u00ba. All was well. My mind was racing in a good way; I can only describe it as a pile of toothpicks being shaken out of a canister with holes at the top. The harder I shake myself, the better the thoughts fall."
+                },
+                {
+                    "id": "paragraph_mvev9djs_xqzqiv",
+                    "type": "paragraph",
+                    "html": "<span style=\"font-weight: normal; font-style: normal\">Then, at mile six of 21,\u00a0</span><span style=\"font-weight: normal; font-style: italic\">Black Hole Sun</span><span style=\"font-weight: normal; font-style: normal\"> came on the radio.\u00a0</span>",
+                    "text": "Then, at mile six of 21,\u00a0Black Hole Sun came on the radio."
+                },
+                {
+                    "id": "paragraph_mvewaau8_79381d",
+                    "type": "paragraph",
+                    "html": "<span style=\"font-weight: normal; font-style: normal\">Unbidden, unwanted, and totally alarming, tears streamed down my cheeks, bested only by the wind on my face as I rode past the palo verde. The soundtrack to my teenage life, Chris Cornell, dead for nine years now. His voice still carries secrets into my soul.\u00a0</span>",
+                    "text": "Unbidden, unwanted, and totally alarming, tears streamed down my cheeks, bested only by the wind on my face as I rode past the palo verde. The soundtrack to my teenage life, Chris Cornell, dead for nine years now. His voice still carries secrets into my soul."
+                },
+                {
+                    "id": "paragraph_mveuq85h_wxa2fe",
+                    "type": "paragraph",
+                    "html": "And then my mind, she played a nasty trick on me. With my eyes wide open, tears still flowing freely, and ever so grateful for a pair of dark sunglasses, I had a vision of heaven.",
+                    "text": "And then my mind, she played a nasty trick on me. With my eyes wide open, tears still flowing freely, and ever so grateful for a pair of dark sunglasses, I had a vision of heaven."
+                },
+                {
+                    "id": "paragraph_mveurtpj_7skpuu",
+                    "type": "paragraph",
+                    "html": "Not the prescribed heaven. Not heaven as you might imagine it, or perhaps even want it. Not the spirit world, not the kingdoms of glory. No dominions, principalities, or concourses of angels in admiration of a loving deity.",
+                    "text": "Not the prescribed heaven. Not heaven as you might imagine it, or perhaps even want it. Not the spirit world, not the kingdoms of glory. No dominions, principalities, or concourses of angels in admiration of a loving deity."
+                },
+                {
+                    "id": "paragraph_mveut4kq_cdbm5j",
+                    "type": "paragraph",
+                    "html": "Instead, I pictured Chris Cornell<b>\u00a0</b><span>sitting on a stool, singing into a microphone, eyes closed. Next to him, another musical hero of mine emerges, s</span><span>eated at a grand piano, smiling gently as his fingers move across the keys.</span>",
+                    "text": "Instead, I pictured Chris Cornell\u00a0sitting on a stool, singing into a microphone, eyes closed. Next to him, another musical hero of mine emerges, seated at a grand piano, smiling gently as his fingers move across the keys."
+                },
+                {
+                    "id": "paragraph_mvewaau8_glj0pg",
+                    "type": "paragraph",
+                    "html": "<span>George Winston. Gone for three years.\u00a0</span><br>",
+                    "text": "George Winston. Gone for three years."
+                },
+                {
+                    "id": "paragraph_mvewaau8_8glov6",
+                    "type": "paragraph",
+                    "html": "<span style=\"font-weight: normal; font-style: normal\">Chris and George. God, I miss them both.</span>",
+                    "text": "Chris and George. God, I miss them both."
+                },
+                {
+                    "id": "paragraph_mveuv8fw_4l0f1d",
+                    "type": "paragraph",
+                    "html": "I don\u2019t know what they\u2019re playing. I don\u2019t care. But they are there, and they are creating something together. And it\u2019s probably not perfect, but it\u2019s improvisational, and it\u2019s moving both of them.\u00a0<span>And it\u2019s moving me to fresh tears.</span>",
+                    "text": "I don\u2019t know what they\u2019re playing. I don\u2019t care. But they are there, and they are creating something together. And it\u2019s probably not perfect, but it\u2019s improvisational, and it\u2019s moving both of them.\u00a0And it\u2019s moving me to fresh tears."
+                },
+                {
+                    "id": "paragraph_mvewaau8_ayvbr8",
+                    "type": "paragraph",
+                    "html": "<span>Simply enjoying each other\u2019s company. I see my mom and my brother there, and even though our mortal lives together were tangled in trauma, blood, and bitter words, maybe they walked by Chris and George and felt a bit of peace. Familial peace. A bit of emotion that transcends whatever veil rests between us.\u00a0</span><span>Their presence doesn't undo what happened. Nor does it have to. Maybe there's just a little peace to be found in that moment. Because heaven or earth, healing goes on.</span><br>",
+                    "text": "Simply enjoying each other\u2019s company. I see my mom and my brother there, and even though our mortal lives together were tangled in trauma, blood, and bitter words, maybe they walked by Chris and George and felt a bit of peace. Familial peace. A bit of emotion that transcends whatever veil rests between us.\u00a0Their presence doesn't undo what happened. Nor does it have to. Maybe there's just a little peace to be found in that moment. Because heaven or earth, healing goes on."
+                },
+                {
+                    "id": "paragraph_mvewaau8_wf50dq",
+                    "type": "paragraph",
+                    "html": "<span style=\"font-weight: normal; font-style: normal\">We talk a lot about the legacies people leave behind. My mom and brother left theirs. I will surely deal with that one in due time. \u00a0</span>",
+                    "text": "We talk a lot about the legacies people leave behind. My mom and brother left theirs. I will surely deal with that one in due time."
+                },
+                {
+                    "id": "paragraph_mvev0p57_hagghd",
+                    "type": "paragraph",
+                    "html": "<span style=\"font-weight: normal; font-style: normal\">Chris and George? There\u2019s something comforting about knowing their work survives them. I can listen to </span><span style=\"font-weight: normal; font-style: italic\">Autumn</span><span style=\"font-weight: normal; font-style: normal\"> or </span><span style=\"font-weight: normal; font-style: italic\">December</span><span style=\"font-weight: normal; font-style: normal\">\u00a0or </span><span style=\"font-weight: normal\"><i>Montana</i></span><span style=\"font-weight: normal; font-style: normal\"> whenever I want. (Please, just ask my wife. I play it all the damn time)</span>",
+                    "text": "Chris and George? There\u2019s something comforting about knowing their work survives them. I can listen to Autumn or December\u00a0or Montana whenever I want. (Please, just ask my wife. I play it all the damn time)"
+                },
+                {
+                    "id": "paragraph_mvewaau8_x0f6dh",
+                    "type": "paragraph",
+                    "html": "<span style=\"font-weight: normal; font-style: normal\">But their recordings are finite.</span>",
+                    "text": "But their recordings are finite."
+                },
+                {
+                    "id": "paragraph_mvewaau8_80z6yj",
+                    "type": "paragraph",
+                    "html": "<span style=\"font-weight: normal; font-style: normal\">There are songs Chris never wrote. Melodies George never discovered. Ideas that hadn\u2019t yet occurred to either of them when their lives ended.\u00a0</span><span>And we\u2019ll never hear them.\u00a0</span><span>That bothers me more than I know how to articulate.</span>",
+                    "text": "There are songs Chris never wrote. Melodies George never discovered. Ideas that hadn\u2019t yet occurred to either of them when their lives ended.\u00a0And we\u2019ll never hear them.\u00a0That bothers me more than I know how to articulate."
+                },
+                {
+                    "id": "paragraph_mvewaau8_fd5tmk",
+                    "type": "paragraph",
+                    "html": "<span style=\"font-weight: normal; font-style: normal\">I don\u2019t know what happens when we die. I\u2019m increasingly uncomfortable with people who claim to know with certainty. I have faith that guides me, hope that sustains me, and spiritual witness that buoys me. I also have questions, doubts, and experiences that don\u2019t always fit together particularly well.</span>",
+                    "text": "I don\u2019t know what happens when we die. I\u2019m increasingly uncomfortable with people who claim to know with certainty. I have faith that guides me, hope that sustains me, and spiritual witness that buoys me. I also have questions, doubts, and experiences that don\u2019t always fit together particularly well."
+                },
+                {
+                    "id": "paragraph_mvewaau8_gwdvjj",
+                    "type": "paragraph",
+                    "html": "<span style=\"font-weight: normal; font-style: normal\">I would like there to be more.\u00a0</span><span>Not necessarily more work or more responsibilities. I don\u2019t want more things to prove.</span>",
+                    "text": "I would like there to be more.\u00a0Not necessarily more work or more responsibilities. I don\u2019t want more things to prove."
+                },
+                {
+                    "id": "paragraph_mvewaau8_ud3dac",
+                    "type": "paragraph",
+                    "html": "<span style=\"font-weight: normal; font-style: normal\">Just more </span><span style=\"font-weight: normal\"><i>possibility</i></span><span style=\"font-weight: normal; font-style: normal\">.</span>",
+                    "text": "Just more possibility."
+                },
+                {
+                    "id": "paragraph_mvewaau8_mvno6e",
+                    "type": "paragraph",
+                    "html": "<span style=\"font-weight: normal; font-style: normal\">More time to understand and discover. To make something beautiful, without any particular obligation to do so.</span>",
+                    "text": "More time to understand and discover. To make something beautiful, without any particular obligation to do so."
+                },
+                {
+                    "id": "paragraph_mvewaau8_n1v9uc",
+                    "type": "paragraph",
+                    "html": "<span style=\"font-weight: normal; font-style: normal\">Maybe that\u2019s why I envisioned that imaginary stage.\u00a0</span><span>I don\u2019t need Chris and George to perform for anybody. I don\u2019t need them to produce another masterpiece.</span>",
+                    "text": "Maybe that\u2019s why I envisioned that imaginary stage.\u00a0I don\u2019t need Chris and George to perform for anybody. I don\u2019t need them to produce another masterpiece."
+                },
+                {
+                    "id": "paragraph_mvewaau8_xt0vbv",
+                    "type": "paragraph",
+                    "html": "<span style=\"font-weight: normal; font-style: normal\">I just see them having the opportunity.</span>",
+                    "text": "I just see them having the opportunity."
+                },
+                {
+                    "id": "paragraph_mvevcmyi_01dgwx",
+                    "type": "paragraph",
+                    "html": "PS, and this is a heavy postscript. If reading these words caused any amount of fear to swell within your soul, I need you to pause. Take a measured step back, and remember who I am. It will never be your responsibility, dear reader, to render precaution or persuasion as the primary volley. These are just cautious musings, carefully meted out at 11:26pm after a heavy week of mental arithmetic. Carry on. I know I will.",
+                    "text": "PS, and this is a heavy postscript. If reading these words caused any amount of fear to swell within your soul, I need you to pause. Take a measured step back, and remember who I am. It will never be your responsibility, dear reader, to render precaution or persuasion as the primary volley. These are just cautious musings, carefully meted out at 11:26pm after a heavy week of mental arithmetic. Carry on. I know I will."
+                }
+            ],
+            "images": [
+                {
+                    "id": "image_mvew7ktg_l2vpnj",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-10-18-let-me-wonder-mvew7lje.jpg",
+                    "objectKey": "narrative/2026-10-18-let-me-wonder-mvew7lje.jpg",
+                    "alt": "Narrative image",
+                    "caption": "Chris and George",
+                    "credit": "",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "width": 1400,
+                    "height": 1050,
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                }
+            ],
+            "formatting": {
+                "mode": "otw-enhanced-markdown",
+                "version": 1,
+                "fallback": "markdown"
+            }
+        },
+        "post_id": "October 18, 2026--let-me-wonder",
+        "share_path": "archive/2026-10-18-let-me-wonder.html",
+        "og_image": "Images/og/archive/2026-10-18-let-me-wonder.png"
+    },
+    {
         "title": "The Theology of Clouds",
         "date": "August 27, 2026",
         "body": "_What remains from the faith my mother gave me_\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-08-27-the-theology-of-clouds-mtc8rk56.jpg \"Even the Circle K parking lot can be sacred\")\n\nWhen I was very little, my nascent view of theology came from my mother. But it wasn't any instruction rooted in the Bible or any other religious text, or even from her anecdotal experience.\n\nNo, she taught me to look up at the clouds to see God. That's where he lived.\n\nIn retrospect, it's a beautiful perspective to impress upon a child. God and Jesus amongst the clouds, not separate from my world, just higher in the sky so they could look down and take care of me. My prayers didn't need to stretch the cosmos to be heard; instead, they simply needed careful amplification (usually through tears).\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-08-27-the-theology-of-clouds-mtc8seen.jpg)\n\nThe clouds this morning were pink, dusty, and just right for deity. They brought to my recollection one of those conversations with my mom where we talked about Jesus. I know I haven't posited much positivity about my religious upbringing on this site, but I think this morning's memory paints a clear path of preserved spiritual amicability.\n\nI think it might be one of the reasons why I don't place much stock or emphasis on the boxes we create as humans to give shape to our gods. I feel much closer spiritually to my maker when I stare up at the Rocky Mountains or dip my feet in the waters of a cold stream. The pages of a dusty old book rarely provide the right impetus to challenge my negative points of view, but the clouds this morning reminded me that God is real and He is working. It set me on the right path.\n\nI am grateful, upon silent recollection, that my mom did indeed instill in me an innate appreciation for nature. \u00a0Be it clouds or mountains, a cascading river or the rolling hills toward Payson, nature draws me close to my heavenly parentage, but she is not my god. She is simply proof of their residence, creation, and power.\n\n---\n\nIn other thoughts today...\n\nI've noticed that I carry an imaginary map of how things are supposed to happen. I've had it my whole life, and it was affected by both desire and external pressure/societal expectations: married by this age, established career by that age, financially secure, spiritually certain, kids raised a certain way, body still working a certain way, some dream accomplished before forty or fifty or sixty.\n\nIt's hard not to look around at life and wonder, right? A million tangential avenues missed, avoided, or ignored. An infinite number of unseen territories where another version of yourself exists, perhaps wandering existentially into the position of jealous thought as well.\n\nWe all give up sometimes. We turn around instead of plodding forward. We berate ourselves for mistakes, for misunderstanding a temporary trial as a permanent life sentence. It's rather normal, in fact. Our brains: they lie to us often and expertly.\n\nBut think about your map application of choice. Google Maps, Apple Maps, Waze, whatever you use...you miss a turn? No worries. The machine does not shame you.\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-08-27-the-theology-of-clouds-mtc8t2rf.jpg)\n\nIt does not badger you that the original route was shorter, or point out how much time you have wasted, or suggest that because you failed to follow the directions you might as well go home.\n\nIt simply recalculates. Your present location becomes the fact that matters, and from there it quietly begins providing another path toward your goal\n\nThere is something theological in that. I spend so much of my life judging myself according to coordinates I no longer occupy.\u00a0I imagine the person I should have been at thirty and forty and the person I hope to be at fifty, and then measure the current self against an abandoned route.\n\nBut is there any useful navigation available from a place where we are no longer standing? No. Whatever wisdom exists must begin with the little blue dot as it presently appears on the map. Here. Now. After the missed turns, the detours, the closed roads, the years we would perhaps travel differently if given another chance.\n\nMaybe I\u2019ve been looking at failure the wrong way. Recalculating doesn\u2019t mean giving up. It\u2019s not saying the goal is out of reach. Sometimes the new path is longer. Sometimes it makes us go back through places we thought we\u2019d left behind.\n\nAnd with time, we might realize that the destination we were aiming for was already taken by someone else, and we get to pick a new one. But the map doesn\u2019t need to tell us how we got here before it starts helping us move forward again. It just wants to know where we are.\n\n---\n\nThat's all for now. If you've been around here lately, know my appreciation remains. I hope it provides a diversion and a bit of understanding about where I come from. I hope you have a chance to check out [frgmnts, my social media app](https://apps.apple.com/us/app/frgmnts/id6761584849).\u00a0It's a nice, quiet place; the polar opposite of Instagram/Facebook. It's growing every day, and I'm loving the development work. It deserves more users. You belong there.\n\nI also have a few new games coming out on the App Store soon, so stay tuned for those.\n\nHave a nice, tidy, adventurous weekend. Till next time!",
