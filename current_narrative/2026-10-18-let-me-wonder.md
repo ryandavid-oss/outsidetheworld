@@ -120,8 +120,8 @@ Date: October 18, 2026
     {
       "id": "paragraph_mvewaau8_fd5tmk",
       "type": "paragraph",
-      "html": "\u003cspan style=\"font-weight: normal; font-style: normal;\"\u003eI don’t know what happens when we die. I’m increasingly uncomfortable with people who claim to know with certainty. I have faith that guides me, hope that sustains me, and spiritual witness that buoys me. I also have questions, doubts, and experiences that don’t always fit together particularly well.\u003c/span\u003e",
-      "text": "I don’t know what happens when we die. I’m increasingly uncomfortable with people who claim to know with certainty. I have faith that guides me, hope that sustains me, and spiritual witness that buoys me. I also have questions, doubts, and experiences that don’t always fit together particularly well."
+      "html": "\u003cspan style=\"font-weight: normal; font-style: normal;\"\u003eI have faith in life beyond death. What I don’t know is the full magnitude of the eternities. I’m increasingly uncomfortable with people who claim to know with certainty. I have faith that guides me, hope that sustains me, and spiritual witness that buoys me. I also have questions, doubts, and experiences that don’t always fit together particularly well.\u003c/span\u003e",
+      "text": "I have faith in life beyond death. What I don’t know is the full magnitude of the eternities. I’m increasingly uncomfortable with people who claim to know with certainty. I have faith that guides me, hope that sustains me, and spiritual witness that buoys me. I also have questions, doubts, and experiences that don’t always fit together particularly well."
     },
     {
       "id": "paragraph_mvewaau8_gwdvjj",
@@ -215,7 +215,7 @@ But their recordings are finite.
 
 There are songs Chris never wrote. Melodies George never discovered. Ideas that hadn’t yet occurred to either of them when their lives ended. And we’ll never hear them. That bothers me more than I know how to articulate.
 
-I don’t know what happens when we die. I’m increasingly uncomfortable with people who claim to know with certainty. I have faith that guides me, hope that sustains me, and spiritual witness that buoys me. I also have questions, doubts, and experiences that don’t always fit together particularly well.
+I have faith in life beyond death. What I don’t know is the full magnitude of the eternities. I’m increasingly uncomfortable with people who claim to know with certainty. I have faith that guides me, hope that sustains me, and spiritual witness that buoys me. I also have questions, doubts, and experiences that don’t always fit together particularly well.
 
 I would like there to be more. Not necessarily more work or more responsibilities. I don’t want more things to prove.
 
