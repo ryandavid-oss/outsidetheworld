@@ -1,0 +1,89 @@
+.teacher .wrap { max-width: 54rem; }
+.masthead nav, .teacher-actions, .teacher-nav, .screen-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem 1rem;
+}
+.teacher-intro { padding-block: clamp(2.5rem, 6vw, 4.75rem) 2rem; }
+.teacher-intro h1 {
+  margin-block: .65rem .9rem;
+  font-size: clamp(3.1rem, 7vw, 5.35rem);
+  letter-spacing: -.055em;
+  line-height: 1;
+}
+.teacher-intro h1 em { color: var(--olive); }
+.teacher-intro > p:not(.eyebrow) { max-width: 56ch; }
+.teacher-actions { margin-top: 1.3rem; }
+.teacher-actions button { cursor: pointer; font-family: inherit; }
+.prep {
+  padding: 1.25rem 1.5rem;
+  border-left: 3px solid var(--olive);
+  background: var(--tint);
+}
+.prep h2 { font-size: 1.75rem; }
+.prep p { margin-top: .55rem; }
+.teacher-nav { border-bottom: 1px solid var(--line); padding-block: 1rem; }
+.teacher-nav a { font-size: .94rem; font-weight: 650; }
+.step { padding-block: 2.3rem; }
+.step + .step { border-top: 1px solid var(--line); }
+.step-head h2 { font-size: clamp(1.95rem, 4.7vw, 3rem); margin-top: .4rem; }
+.step > p, .step > blockquote { margin-top: .9rem; max-width: 75ch; }
+.screen-links a {
+  padding: .25rem .55rem;
+  background: var(--tint);
+  font-size: .86rem;
+  font-weight: 660;
+}
+.step blockquote {
+  border-left: 2px solid #8b7b5d;
+  padding-left: 1rem;
+  font: 1.26rem/1.45 var(--serif);
+}
+.teacher-timeline {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  gap: .45rem .9rem;
+  margin-block: 1rem;
+}
+.teacher-timeline dt { font-weight: 700; }
+.teacher-timeline dd { margin: 0; }
+.teacher-source { font-size: .87rem; color: var(--muted); }
+.step .teacher-question {
+  color: var(--deep);
+  font: 1.5rem/1.35 var(--serif);
+}
+.teacher-extra {
+  margin-top: .9rem;
+  padding: .6rem .85rem;
+  border: 1px solid var(--line);
+  border-radius: .25rem;
+}
+.teacher-extra summary { cursor: pointer; font-size: .95rem; font-weight: 650; }
+.teacher-extra p { margin-block: .4rem .15rem; }
+
+@media (max-width: 39rem) {
+  .masthead nav { gap: .15rem .6rem; font-size: .83rem; }
+  .teacher-timeline { grid-template-columns: 1fr; gap: .1rem; }
+  .teacher-timeline dd + dt { margin-top: .5rem; }
+  .step { padding-block: 1.8rem; }
+}
+
+@media print {
+  @page { margin: .55in; }
+  html { scroll-padding: 0; }
+  .teacher { background: #fff; color: #111; font-size: 10pt; line-height: 1.32; }
+  .teacher .masthead, .teacher-nav, .teacher-actions, .screen-links, .teacher-extra, .footer > a, .skip { display: none; }
+  .teacher .wrap { max-width: none; width: auto; }
+  .teacher-intro { padding-block: 0 .7rem; }
+  .teacher-intro h1 { font-size: 28pt; }
+  .prep { background: transparent; padding: .5rem .8rem; }
+  .prep h2 { font-size: 14pt; }
+  .step { padding-block: .85rem; }
+  .step-head h2 { font-size: 18pt; }
+  .step-head { break-after: avoid; }
+  .step > p, .step > blockquote { margin-top: .42rem; }
+  .step blockquote, .step .teacher-question { font-size: 11pt; }
+  .teacher-timeline { grid-template-columns: 8rem 1fr; gap: .2rem .4rem; }
+  .teacher .footer { padding: .4rem 0; }
+}
