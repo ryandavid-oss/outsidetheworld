@@ -1,5 +1,215 @@
 const current_narrative = [
     {
+        "title": "The Lights That Melted the Snow",
+        "date": "November 18, 2026",
+        "body": "_Old incandescent C9s, the cold light of modern LEDs, and the Christmas magic I'm not ready to let fade._\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-11-18-the-lights-that-melted-the-snow-mwmpkco6.jpg)\n\nThe world is full of wonder, when you are a child. The ordinary in life can be transformative, and the superlative? Well...let's just say that is how and where core memories are created.\n\n**I have a memory as a child**, lying on the top of my twin bunk bed. Now, mind you...this is not one distinct memory that I can tie down to one certain date in the past. Rather, it is an amalgamation of the overall feeling I remember. Anyway. What I remember is this:\n\nChristmas lights.\n\nAnd very, very specific lights, mind you. The incandescent, painted, multi-color C9 bulbs. That was what my dad hung on our house in Bountiful, Utah, when I was very little. And those C9s _glowed_. They looked absolutely magical as I peered up through that window, looking up at the eaves of my house as the snow would fall and ice formed. The incandescent warmth from the bulbs melted the ice and snow, leaving semicircular patterns around the places where they were hung.\n\nThey were always neat, tidy, and straight. They burned out quite often, but my dad had an entire box of spares always ready to go. He would let me help (I would stand by the ladder) as he climbed up and fixed whichever bulbs were finished. These lights, they fitted the house just right. The black roof, the red brick, the white trimming around our windows...I know nothing else would have done the holiday season any justice.\n\n**Then, we moved to Arizona.** Not only did I lose the Christmas snow, but my dear mother also insisted that my father install icicle lights on the house, instead of my beloved C9s. Yes yes...they were pretty enough, and thank God they were actually incandescent (this being the early 90s, LEDs were still not an option). But they were plain white, and they were yet another reminder to my young brain that nothing is forever, youth is fleeting, and I was certainly not yet in charge of my own destiny.\n\nThese days, it's all LEDs, inflatables, and smart lights. Normally? I have no problem with any of them. Hell, my entire house is full of Philips Hue LED bulbs, Govee smart lights, and other types of modern fixtures. But the mass-market LED bulbs that manufacturers pass as holiday lights are nothing more than a pale imitation of what we had when we were young.\n\nI should mention that, just as James May often says, not everything was good back in the \"good old days\". Quite the contrary; a lot of it was crap. Those C9s my dad used? They were fragile, fickle, and tragically power-hungry. You also could not string more than 2 or 3 sets together without blowing a fuse or lighting the house on fire. So naturally, these mass-market LED strands took off! They were durable. They cost pennies to run. And you could connect 2 dozen strands together without a hitch.\n\nBut the problem with these lights, at least to me, is their presentation. They lack everything that the old incandescent lights excelled at. Light manufacturers have spent decades making LEDs cheaper, brighter, and more efficient, without necessarily making them pleasant to look at.\n\nIt would also help to know a little about how those old bulbs worked in the first place.\n\nChristmas lights have been around since the late 1800s, and the familiar C9 bulbs made their appearance in the late 1920s. GE introduced them for outdoor decorating, with larger bulbs that could withstand the elements and be seen from the street. The basic technology, though, was simple. Electricity passed through a tiny metal filament, heating it until it glowed. Surround that with a colored bulb, and boom: you had a Christmas light.\u00a0The result was a soft, rich color that radiated from the entire bulb.\n\nWhen LED Christmas lights began arriving in stores, manufacturers largely abandoned that approach. Instead of producing warm light and filtering it through colored glass, they used tiny components that emitted (the E in LED!) the desired color directly. Blue was blue. Green was green.\n\nAnd while this was efficient, the resulting colors were often incredibly harsh and saturated. Instead of a warm, glowing bulb, you got a tiny, intensely bright point of light, frequently housed in a cheap plastic shell.\n\nSigh...and then, there's the flickering. Which is the worst part, at least in my addled mind.\n\nIncandescent bulbs have the advantage. Their filaments stay hot, even as the electricity flowing through them fluctuates. They don't instantly stop glowing every time the electrical current changes. LEDs, on the other hand, react almost immediately. Without decent electronics to smooth out the power, they can flicker rapidly, sometimes enough to create a distracting strobing effect when you move your eyes. (Tell me you haven't seen this before...)\n\nAnd because better electronics cost more money, guess which approach tends to win when manufacturers are trying to sell a thousand Christmas lights for twenty bucks?\n\nThe frustrating thing is that none of this is an inherent problem with LEDs. They can produce beautiful, warm, nearly flicker-free light. But doing so requires manufacturers to care about more than cost, brightness, and efficiency.\n\nSomewhere along the way, we figured out how to make Christmas lights that were better at almost everything,\u00a0_except actually looking like Christmas lights._\n\nSo, I've gone on strike the past couple of years. I would buy strands of incandescent mini lights, which are still mass-produced and cheap to buy. The problem is that last year's purchase didn't make it to 2026, and I will be damned if I am coerced into another Target run to buy $20 worth of garbage incandescent lights. (They just don't make them like they used to...wait...I seem to be subverting James May's adage.)\n\nI've even considered permanent holiday lighting, which, admittedly, looks pretty damn good. Professional installations still cost thousands of dollars, unfortunately...and my willingness to self-install a set of Costco/Govee permanent outdoor lights wanes as I get older. I am too much of a perfectionist when it comes to lighting to do this myself. They have to be even, they have to be hidden, and they have to stand the test of time.\n\nAnother memory comes to mind. And this one is remarkably less cheery than the seven-year-old human staring up at the warm incandescent C9s. It is the memory of when my mom started losing interest in decorating for Christmas. I was the only one left at home, and I was the typical grumpy teen, so it was only natural that my mom lost a bit of interest in the magic and whimsy of the holiday season.\n\nSo that brings me to the crux of this essay...I simply cannot let the slow slide of holiday apathy begin in earnest. There are still children at home. And these small humans are the most excitable and most holiday-loving creatures in my life. Therefore, I publicly commit here and now to the hanging up of lights this year. And while they will undoubtedly **not** be the C9s of my youth, they will be the closest imitation I can find for now.\n\nAnd in the future? Who knows. Maybe I'll finally spend the money on a set of\u00a0[Tru-Tone C9 Dura-Bulbs](https://tru-tone.com/products/c9-dura-bulb%E2%84%A2-classicolor%E2%84%A2-25-ct), which look remarkably close to the old incandescents, but without the fragile glass or obscene power consumption. They're expensive, sure. But at this point, how much money have I wasted buying cheap lights that barely survive a single Christmas?\n\nOr maybe I'll bite the bullet and have permanent lighting professionally installed. It's not as though I'm opposed to smart lighting. My outdoor lighting is already replete with Philips Hue bollards and spotlights, and I absolutely love them. So, never say never. Perhaps there's a future where I can have my perfectly arranged, permanently installed lights and the nostalgic Christmas glow I've been chasing.\n\nBut whatever I decide, the quest for that warmth hanging from the eaves of my house remains.\n\nI guess I'm just that seven-year-old kid, still looking out of my window, hoping to see something magical glowing on the other side.",
+        "file": "2026-11-18-the-lights-that-melted-the-snow.md",
+        "publisher": {
+            "schema": "otw.publisher.post",
+            "version": 2,
+            "source": "publisher.html",
+            "subhead": "Old incandescent C9s, the cold light of modern LEDs, and the Christmas magic I'm not ready to let fade.",
+            "blocks": [
+                {
+                    "id": "image_mwmpkcez_xlsgq3",
+                    "type": "image",
+                    "imageRef": "image_mwmpkcez_xlsgq3",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-11-18-the-lights-that-melted-the-snow-mwmpkco6.jpg",
+                    "objectKey": "narrative/2026-11-18-the-lights-that-melted-the-snow-mwmpkco6.jpg",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "displaySize": "large",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                },
+                {
+                    "id": "p_mwmpkcf0_35uhbd",
+                    "type": "paragraph",
+                    "html": "<span>The world is full of wonder, when you are a child. The ordinary in life can be transformative, and the superlative? Well...let's just say that is how and where core memories are created.</span>",
+                    "text": "The world is full of wonder, when you are a child. The ordinary in life can be transformative, and the superlative? Well...let's just say that is how and where core memories are created."
+                },
+                {
+                    "id": "paragraph_mwmq1gdg_5czub6",
+                    "type": "paragraph",
+                    "html": "<b>I have a memory as a child</b>, lying on the top of my twin bunk bed. Now, mind you...this is not one distinct memory that I can tie down to one certain date in the past. Rather, it is an amalgamation of the overall feeling I remember. Anyway. What I remember is this:",
+                    "text": "I have a memory as a child, lying on the top of my twin bunk bed. Now, mind you...this is not one distinct memory that I can tie down to one certain date in the past. Rather, it is an amalgamation of the overall feeling I remember. Anyway. What I remember is this:"
+                },
+                {
+                    "id": "paragraph_mwmq1gdg_s0k0te",
+                    "type": "paragraph",
+                    "html": "<span>Christmas lights.</span>",
+                    "text": "Christmas lights."
+                },
+                {
+                    "id": "paragraph_mwmq1gdg_lvss6s",
+                    "type": "paragraph",
+                    "html": "And very, very specific lights, mind you. The incandescent, painted, multi-color C9 bulbs. That was what my dad hung on our house in Bountiful, Utah, when I was very little. And those C9s <i>glowed</i>. They looked absolutely magical as I peered up through that window, looking up at the eaves of my house as the snow would fall and ice formed. The incandescent warmth from the bulbs melted the ice and snow, leaving semicircular patterns around the places where they were hung.",
+                    "text": "And very, very specific lights, mind you. The incandescent, painted, multi-color C9 bulbs. That was what my dad hung on our house in Bountiful, Utah, when I was very little. And those C9s glowed. They looked absolutely magical as I peered up through that window, looking up at the eaves of my house as the snow would fall and ice formed. The incandescent warmth from the bulbs melted the ice and snow, leaving semicircular patterns around the places where they were hung."
+                },
+                {
+                    "id": "paragraph_mwmq1gdg_663jrj",
+                    "type": "paragraph",
+                    "html": "<span>They were always neat, tidy, and straight. They burned out quite often, but my dad had an entire box of spares always ready to go. He would let me help (I would stand by the ladder) as he climbed up and fixed whichever bulbs were finished. These lights, they fitted the house just right. The black roof, the red brick, the white trimming around our windows...I know nothing else would have done the holiday season any justice.</span>",
+                    "text": "They were always neat, tidy, and straight. They burned out quite often, but my dad had an entire box of spares always ready to go. He would let me help (I would stand by the ladder) as he climbed up and fixed whichever bulbs were finished. These lights, they fitted the house just right. The black roof, the red brick, the white trimming around our windows...I know nothing else would have done the holiday season any justice."
+                },
+                {
+                    "id": "paragraph_mwmq1gdg_7c6l0k",
+                    "type": "paragraph",
+                    "html": "<b>Then, we moved to Arizona.</b> Not only did I lose the Christmas snow, but my dear mother also insisted that my father install icicle lights on the house, instead of my beloved C9s. Yes yes...they were pretty enough, and thank God they were actually incandescent (this being the early 90s, LEDs were still not an option). But they were plain white, and they were yet another reminder to my young brain that nothing is forever, youth is fleeting, and I was certainly not yet in charge of my own destiny.",
+                    "text": "Then, we moved to Arizona. Not only did I lose the Christmas snow, but my dear mother also insisted that my father install icicle lights on the house, instead of my beloved C9s. Yes yes...they were pretty enough, and thank God they were actually incandescent (this being the early 90s, LEDs were still not an option). But they were plain white, and they were yet another reminder to my young brain that nothing is forever, youth is fleeting, and I was certainly not yet in charge of my own destiny."
+                },
+                {
+                    "id": "paragraph_mwmq1gdg_ztcdlg",
+                    "type": "paragraph",
+                    "html": "<span>These days, it's all LEDs, inflatables, and smart lights. Normally? I have no problem with any of them. Hell, my entire house is full of Philips Hue LED bulbs, Govee smart lights, and other types of modern fixtures. But the mass-market LED bulbs that manufacturers pass as holiday lights are nothing more than a pale imitation of what we had when we were young.</span>",
+                    "text": "These days, it's all LEDs, inflatables, and smart lights. Normally? I have no problem with any of them. Hell, my entire house is full of Philips Hue LED bulbs, Govee smart lights, and other types of modern fixtures. But the mass-market LED bulbs that manufacturers pass as holiday lights are nothing more than a pale imitation of what we had when we were young."
+                },
+                {
+                    "id": "paragraph_mwmq1gdg_j49735",
+                    "type": "paragraph",
+                    "html": "<span>I should mention that, just as James May often says, not everything was good back in the \"good old days\". Quite the contrary; a lot of it was crap. Those C9s my dad used? They were fragile, fickle, and tragically power-hungry. You also could not string more than 2 or 3 sets together without blowing a fuse or lighting the house on fire. So naturally, these mass-market LED strands took off! They were durable. They cost pennies to run. And you could connect 2 dozen strands together without a hitch.</span>",
+                    "text": "I should mention that, just as James May often says, not everything was good back in the \"good old days\". Quite the contrary; a lot of it was crap. Those C9s my dad used? They were fragile, fickle, and tragically power-hungry. You also could not string more than 2 or 3 sets together without blowing a fuse or lighting the house on fire. So naturally, these mass-market LED strands took off! They were durable. They cost pennies to run. And you could connect 2 dozen strands together without a hitch."
+                },
+                {
+                    "id": "paragraph_mwmq1gdg_wtxq61",
+                    "type": "paragraph",
+                    "html": "<span>But the problem with these lights, at least to me, is their presentation. They lack everything that the old incandescent lights excelled at. Light manufacturers have spent decades making LEDs cheaper, brighter, and more efficient, without necessarily making them pleasant to look at.</span>",
+                    "text": "But the problem with these lights, at least to me, is their presentation. They lack everything that the old incandescent lights excelled at. Light manufacturers have spent decades making LEDs cheaper, brighter, and more efficient, without necessarily making them pleasant to look at."
+                },
+                {
+                    "id": "paragraph_mwmq1gdg_82a0me",
+                    "type": "paragraph",
+                    "html": "<span>It would also help to know a little about how those old bulbs worked in the first place.</span>",
+                    "text": "It would also help to know a little about how those old bulbs worked in the first place."
+                },
+                {
+                    "id": "paragraph_mwmq1gdg_s388ws",
+                    "type": "paragraph",
+                    "html": "<span>Christmas lights have been around since the late 1800s, and the familiar C9 bulbs made their appearance in the late 1920s. GE introduced them for outdoor decorating, with larger bulbs that could withstand the elements and be seen from the street. The basic technology, though, was simple. Electricity passed through a tiny metal filament, heating it until it glowed. Surround that with a colored bulb, and boom: you had a Christmas light.\u00a0</span><span>The result was a soft, rich color that radiated from the entire bulb.</span>",
+                    "text": "Christmas lights have been around since the late 1800s, and the familiar C9 bulbs made their appearance in the late 1920s. GE introduced them for outdoor decorating, with larger bulbs that could withstand the elements and be seen from the street. The basic technology, though, was simple. Electricity passed through a tiny metal filament, heating it until it glowed. Surround that with a colored bulb, and boom: you had a Christmas light.\u00a0The result was a soft, rich color that radiated from the entire bulb."
+                },
+                {
+                    "id": "paragraph_mwmq1gdg_zqvu2d",
+                    "type": "paragraph",
+                    "html": "<span>When LED Christmas lights began arriving in stores, manufacturers largely abandoned that approach. Instead of producing warm light and filtering it through colored glass, they used tiny components that emitted (the E in LED!) the desired color directly. Blue was blue. Green was green. </span>",
+                    "text": "When LED Christmas lights began arriving in stores, manufacturers largely abandoned that approach. Instead of producing warm light and filtering it through colored glass, they used tiny components that emitted (the E in LED!) the desired color directly. Blue was blue. Green was green."
+                },
+                {
+                    "id": "paragraph_mwmppnkq_34hmzi",
+                    "type": "paragraph",
+                    "html": "<span>And while this was efficient, the resulting colors were often incredibly harsh and saturated. Instead of a warm, glowing bulb, you got a tiny, intensely bright point of light, frequently housed in a cheap plastic shell.</span>",
+                    "text": "And while this was efficient, the resulting colors were often incredibly harsh and saturated. Instead of a warm, glowing bulb, you got a tiny, intensely bright point of light, frequently housed in a cheap plastic shell."
+                },
+                {
+                    "id": "paragraph_mwmq1gdh_d6b7cm",
+                    "type": "paragraph",
+                    "html": "<span>Sigh...and then, there's the flickering. Which is the worst part, at least in my addled mind.</span>",
+                    "text": "Sigh...and then, there's the flickering. Which is the worst part, at least in my addled mind."
+                },
+                {
+                    "id": "paragraph_mwmq1gdh_e5y4qy",
+                    "type": "paragraph",
+                    "html": "<span>Incandescent bulbs have the advantage. Their filaments stay hot, even as the electricity flowing through them fluctuates. They don't instantly stop glowing every time the electrical current changes. LEDs, on the other hand, react almost immediately. Without decent electronics to smooth out the power, they can flicker rapidly, sometimes enough to create a distracting strobing effect when you move your eyes. (Tell me you haven't seen this before...)</span>",
+                    "text": "Incandescent bulbs have the advantage. Their filaments stay hot, even as the electricity flowing through them fluctuates. They don't instantly stop glowing every time the electrical current changes. LEDs, on the other hand, react almost immediately. Without decent electronics to smooth out the power, they can flicker rapidly, sometimes enough to create a distracting strobing effect when you move your eyes. (Tell me you haven't seen this before...)"
+                },
+                {
+                    "id": "paragraph_mwmq1gdh_udpl8h",
+                    "type": "paragraph",
+                    "html": "<span>And because better electronics cost more money, guess which approach tends to win when manufacturers are trying to sell a thousand Christmas lights for twenty bucks?</span>",
+                    "text": "And because better electronics cost more money, guess which approach tends to win when manufacturers are trying to sell a thousand Christmas lights for twenty bucks?"
+                },
+                {
+                    "id": "paragraph_mwmq1gdh_666375",
+                    "type": "paragraph",
+                    "html": "<span>The frustrating thing is that none of this is an inherent problem with LEDs. They can produce beautiful, warm, nearly flicker-free light. But doing so requires manufacturers to care about more than cost, brightness, and efficiency.</span>",
+                    "text": "The frustrating thing is that none of this is an inherent problem with LEDs. They can produce beautiful, warm, nearly flicker-free light. But doing so requires manufacturers to care about more than cost, brightness, and efficiency."
+                },
+                {
+                    "id": "paragraph_mwmq1gdh_gmeeby",
+                    "type": "paragraph",
+                    "html": "<span>Somewhere along the way, we figured out how to make Christmas lights that were better at almost everything,<span>\u00a0</span></span><em><span>except actually looking like Christmas lights.</span></em>",
+                    "text": "Somewhere along the way, we figured out how to make Christmas lights that were better at almost everything,\u00a0except actually looking like Christmas lights."
+                },
+                {
+                    "id": "paragraph_mwmq1gdh_1yj9j8",
+                    "type": "paragraph",
+                    "html": "<span>So, I've gone on strike the past couple of years. I would buy strands of incandescent mini lights, which are still mass-produced and cheap to buy. The problem is that last year's purchase didn't make it to 2026, and I will be damned if I am coerced into another Target run to buy $20 worth of garbage incandescent lights. (They just don't make them like they used to...wait...I seem to be subverting James May's adage.)</span>",
+                    "text": "So, I've gone on strike the past couple of years. I would buy strands of incandescent mini lights, which are still mass-produced and cheap to buy. The problem is that last year's purchase didn't make it to 2026, and I will be damned if I am coerced into another Target run to buy $20 worth of garbage incandescent lights. (They just don't make them like they used to...wait...I seem to be subverting James May's adage.)"
+                },
+                {
+                    "id": "paragraph_mwmq1gdh_t6c2cq",
+                    "type": "paragraph",
+                    "html": "<span>I've even considered permanent holiday lighting, which, admittedly, looks pretty damn good. Professional installations still cost thousands of dollars, unfortunately...and my willingness to self-install a set of Costco/Govee permanent outdoor lights wanes as I get older. I am too much of a perfectionist when it comes to lighting to do this myself. They have to be even, they have to be hidden, and they have to stand the test of time.</span>",
+                    "text": "I've even considered permanent holiday lighting, which, admittedly, looks pretty damn good. Professional installations still cost thousands of dollars, unfortunately...and my willingness to self-install a set of Costco/Govee permanent outdoor lights wanes as I get older. I am too much of a perfectionist when it comes to lighting to do this myself. They have to be even, they have to be hidden, and they have to stand the test of time."
+                },
+                {
+                    "id": "paragraph_mwmq1gdh_h353jk",
+                    "type": "paragraph",
+                    "html": "<span>Another memory comes to mind. And this one is remarkably less cheery than the seven-year-old human staring up at the warm incandescent C9s. It is the memory of when my mom started losing interest in decorating for Christmas. I was the only one left at home, and I was the typical grumpy teen, so it was only natural that my mom lost a bit of interest in the magic and whimsy of the holiday season.</span>",
+                    "text": "Another memory comes to mind. And this one is remarkably less cheery than the seven-year-old human staring up at the warm incandescent C9s. It is the memory of when my mom started losing interest in decorating for Christmas. I was the only one left at home, and I was the typical grumpy teen, so it was only natural that my mom lost a bit of interest in the magic and whimsy of the holiday season."
+                },
+                {
+                    "id": "paragraph_mwmq1gdh_f0dibw",
+                    "type": "paragraph",
+                    "html": "So that brings me to the crux of this essay...I simply cannot let the slow slide of holiday apathy begin in earnest. There are still children at home. And these small humans are the most excitable and most holiday-loving creatures in my life. Therefore, I publicly commit here and now to the hanging up of lights this year. And while they will undoubtedly <b>not</b> be the C9s of my youth, they will be the closest imitation I can find for now.",
+                    "text": "So that brings me to the crux of this essay...I simply cannot let the slow slide of holiday apathy begin in earnest. There are still children at home. And these small humans are the most excitable and most holiday-loving creatures in my life. Therefore, I publicly commit here and now to the hanging up of lights this year. And while they will undoubtedly not be the C9s of my youth, they will be the closest imitation I can find for now."
+                },
+                {
+                    "id": "paragraph_mwmq1gdh_trxmcj",
+                    "type": "paragraph",
+                    "html": "<span>And in the future? Who knows. Maybe I'll finally spend the money on a set of<span>\u00a0</span></span><a href=\"https://tru-tone.com/products/c9-dura-bulb%E2%84%A2-classicolor%E2%84%A2-25-ct\"><span>Tru-Tone C9 Dura-Bulbs</span></a><span>, which look remarkably close to the old incandescents, but without the fragile glass or obscene power consumption. They're expensive, sure. But at this point, how much money have I wasted buying cheap lights that barely survive a single Christmas?</span>",
+                    "text": "And in the future? Who knows. Maybe I'll finally spend the money on a set of\u00a0Tru-Tone C9 Dura-Bulbs, which look remarkably close to the old incandescents, but without the fragile glass or obscene power consumption. They're expensive, sure. But at this point, how much money have I wasted buying cheap lights that barely survive a single Christmas?"
+                },
+                {
+                    "id": "paragraph_mwmq1gdh_nr8yj2",
+                    "type": "paragraph",
+                    "html": "<span>Or maybe I'll bite the bullet and have permanent lighting professionally installed. It's not as though I'm opposed to smart lighting. My outdoor lighting is already replete with Philips Hue bollards and spotlights, and I absolutely love them. So, never say never. Perhaps there's a future where I can have my perfectly arranged, permanently installed lights and the nostalgic Christmas glow I've been chasing.</span>",
+                    "text": "Or maybe I'll bite the bullet and have permanent lighting professionally installed. It's not as though I'm opposed to smart lighting. My outdoor lighting is already replete with Philips Hue bollards and spotlights, and I absolutely love them. So, never say never. Perhaps there's a future where I can have my perfectly arranged, permanently installed lights and the nostalgic Christmas glow I've been chasing."
+                },
+                {
+                    "id": "paragraph_mwmq1gdh_5z4h73",
+                    "type": "paragraph",
+                    "html": "<span>But whatever I decide, the quest for that warmth hanging from the eaves of my house remains.</span>",
+                    "text": "But whatever I decide, the quest for that warmth hanging from the eaves of my house remains."
+                },
+                {
+                    "id": "paragraph_mwmq1gdh_gf2grd",
+                    "type": "paragraph",
+                    "html": "<span>I guess I'm just that seven-year-old kid, still looking out of my window, hoping to see something magical glowing on the other side.</span>",
+                    "text": "I guess I'm just that seven-year-old kid, still looking out of my window, hoping to see something magical glowing on the other side."
+                }
+            ],
+            "images": [
+                {
+                    "id": "image_mwmpkcez_xlsgq3",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-11-18-the-lights-that-melted-the-snow-mwmpkco6.jpg",
+                    "objectKey": "narrative/2026-11-18-the-lights-that-melted-the-snow-mwmpkco6.jpg",
+                    "alt": "Narrative image",
+                    "caption": "",
+                    "credit": "",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "width": 1400,
+                    "height": 788,
+                    "displaySize": "large",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                }
+            ],
+            "featureImageRef": "image_mwmpkcez_xlsgq3",
+            "formatting": {
+                "mode": "otw-enhanced-markdown",
+                "version": 1,
+                "fallback": "markdown"
+            }
+        },
+        "post_id": "November 18, 2026--the-lights-that-melted-the-snow",
+        "share_path": "archive/2026-11-18-the-lights-that-melted-the-snow.html",
+        "og_image": "Images/og/archive/2026-11-18-the-lights-that-melted-the-snow.png"
+    },
+    {
         "title": "Let Me Wonder",
         "date": "October 18, 2026",
         "body": "_The heaven I imagine, and the questions I will never stop asking._\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-10-18-let-me-wonder-mvew7lje.jpg \"Chris and George\")\n\n**Oh, how I wish I could wake up naturally every morning,** and have time for the things I wish to do.**\u00a0**Today, I had an extraordinary need to clear my head before church. I had too much on my mind, and getting on the bike is usually the best way for me to find clarity. It had been a long week, an exhausting weekend, and there were a few disappointments I hadn\u2019t quite figured out what to do with.\n\nThe weather was precious. Clouds, no wind. 65\u00ba. All was well. My mind was racing in a good way; I can only describe it as a pile of toothpicks being shaken out of a canister with holes at the top. The harder I shake myself, the better the thoughts fall.\n\nThen, at mile six of 21,\u00a0_Black Hole Sun_ came on the radio.\n\nUnbidden, unwanted, and totally alarming, tears streamed down my cheeks, bested only by the wind on my face as I rode past the palo verde. The soundtrack to my teenage life, Chris Cornell, dead for nine years now. His voice still carries secrets into my soul.\n\nAnd then my mind, she played a nasty trick on me. With my eyes wide open, tears still flowing freely, and ever so grateful for a pair of dark sunglasses, I had a vision of heaven.\n\nNot the prescribed heaven. Not heaven as you might imagine it, or perhaps even want it. Not the spirit world, not the kingdoms of glory. No dominions, principalities, or concourses of angels in admiration of a loving deity.\n\nInstead, I pictured Chris Cornell**\u00a0**sitting on a stool, singing into a microphone, eyes closed. Next to him, another musical hero of mine emerges, seated at a grand piano, smiling gently as his fingers move across the keys.\n\nGeorge Winston. Gone for three years.\n\nChris and George. God, I miss them both.\n\nI don\u2019t know what they\u2019re playing. I don\u2019t care. But they are there, and they are creating something together. And it\u2019s probably not perfect, but it\u2019s improvisational, and it\u2019s moving both of them.\u00a0And it\u2019s moving me to fresh tears.\n\nSimply enjoying each other\u2019s company. I see my mom and my brother there, and even though our mortal lives together were tangled in trauma, blood, and bitter words, maybe they walked by Chris and George and felt a bit of peace. Familial peace. A bit of emotion that transcends whatever veil rests between us.\u00a0Their presence doesn't undo what happened. Nor does it have to. Maybe there's just a little peace to be found in that moment. Because heaven or earth, healing goes on.\n\nWe talk a lot about the legacies people leave behind. My mom and brother left theirs. I will surely deal with that one in due time.\n\nChris and George? There\u2019s something comforting about knowing their work survives them. I can listen to _Autumn_ or _December_\u00a0or _Montana_ whenever I want. (Please, just ask my wife. I play it all the damn time)\n\nBut their recordings are finite.\n\nThere are songs Chris never wrote. Melodies George never discovered. Ideas that hadn\u2019t yet occurred to either of them when their lives ended.\u00a0And we\u2019ll never hear them.\u00a0That bothers me more than I know how to articulate.\n\nI have faith in life beyond death. What I don\u2019t know is the full magnitude of the eternities. I\u2019m increasingly uncomfortable with people who claim to know with certainty. I have faith that guides me, hope that sustains me, and spiritual witness that buoys me. I also have questions, doubts, and experiences that don\u2019t always fit together particularly well.\n\nI would like there to be more.\u00a0Not necessarily more work or more responsibilities. I don\u2019t want more things to prove.\n\nJust more _possibility_.\n\nMore time to understand and discover. To make something beautiful, without any particular obligation to do so.\n\nMaybe that\u2019s why I envisioned that imaginary stage.\u00a0I don\u2019t need Chris and George to perform for anybody. I don\u2019t need them to produce another masterpiece.\n\nI just see them having the opportunity.\n\nPS, and this is a heavy postscript. If reading these words caused any amount of fear to swell within your soul, I need you to pause. Take a measured step back, and remember who I am. It will never be your responsibility, dear reader, to render precaution or persuasion as the primary volley. These are just cautious musings, carefully meted out at 11:26pm after a heavy week of mental arithmetic. Carry on. I know I will.",
