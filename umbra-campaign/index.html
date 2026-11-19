@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111016">
+  <meta name="description" content="A ten-stage formation shooter. Beat the par times, build your ship, and take down the Eventide Bastion.">
+  <title>Umbra Campaign</title>
+  <script type="module" crossorigin src="./assets/index-TP-cbvw7.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-CquyCgj2.css">
+</head>
+<body>
+  <main class="console">
+    <header class="mast">
+      <div class="brand"><span class="mark" aria-hidden="true"></span> Umbra <strong>Campaign</strong></div>
+      <div class="tools">
+        <button id="audio" class="quiet" type="button" aria-pressed="true">Sound on</button>
+        <button id="pause" class="quiet" type="button" disabled>Pause</button>
+      </div>
+    </header>
+
+    <section class="cabinet" aria-label="Umbra Campaign">
+      <div class="hud" aria-label="Flight instruments">
+        <div class="readout"><span>Stage</span><strong><span id="stage">01</span><small id="stage-total"> / 10</small></strong></div>
+        <div class="readout">
+          <span>Shields</span>
+          <div id="shield-meter" class="shield-meter" role="meter" aria-label="Shields" aria-valuemin="0" aria-valuemax="5" aria-valuenow="5">
+            <div id="shield-cells" class="shield-cells" aria-hidden="true"></div>
+            <span id="shields" class="shield-count" aria-hidden="true">5/5</span>
+          </div>
+        </div>
+        <div class="readout"><span>Lives</span><strong id="lives">02</strong></div>
+        <div class="readout credits"><span>Salvage</span><strong><span id="cash">000</span><small> CR</small></strong></div>
+        <div class="readout"><span>Score</span><strong id="score">0</strong></div>
+        <div class="readout"><span>Best</span><strong id="best">0</strong></div>
+      </div>
+
+      <div id="field" class="field" data-view="title">
+        <canvas id="game" tabindex="-1" aria-label="Playfield. Move with the arrow keys or WASD. Tap Space to fire."></canvas>
+        <div class="corner top-left" aria-hidden="true"></div><div class="corner top-right" aria-hidden="true"></div>
+        <div class="corner bottom-left" aria-hidden="true"></div><div class="corner bottom-right" aria-hidden="true"></div>
+
+        <div id="cover" class="cover">
+          <div class="cover-sprite" aria-hidden="true"></div>
+          <div class="brief">
+            <p class="eyebrow">Ten-stage formation shooter</p>
+            <h1 aria-label="Umbra Campaign">UMBRA <span>CAMPAIGN</span></h1>
+            <p class="intro">Break formations, beat the clock, and build up your ship for a final fight against the Eventide Bastion.</p>
+            <button id="start" type="button" class="action"><i aria-hidden="true"></i> Launch campaign</button>
+          </div>
+        </div>
+
+        <div id="banner" class="banner" aria-live="polite" hidden></div>
+        <div id="boss-hud" class="boss-hud" hidden>
+          <span id="boss-label">Eventide Bastion</span>
+          <progress id="boss-health" max="1" value="1" aria-labelledby="boss-label"></progress>
+        </div>
+        <div id="shop" class="shop" hidden>
+          <header class="dock-heading">
+            <p class="eyebrow" id="dock-stage">Stage 1 cleared</p>
+            <h2>Salvage dock</h2>
+          </header>
+          <p id="dock-status" class="dock-status" aria-live="polite">Fly into a bay and hold position to dock.</p>
+        </div>
+        <template id="bay-template">
+          <div class="bay">
+            <span class="bay-icon" aria-hidden="true"></span>
+            <strong></strong><span class="bay-detail"></span><i class="dock-meter" aria-hidden="true"></i>
+          </div>
+        </template>
+
+        <div id="dialog" class="overlay" role="region" aria-labelledby="dialog-title" hidden>
+          <div class="dialog">
+            <p id="dialog-tag" class="eyebrow"></p>
+            <h2 id="dialog-title"></h2>
+            <p id="dialog-description"></p>
+            <dl class="score-report" id="score-report" hidden>
+              <div><dt>Enemy points</dt><dd id="report-enemies"></dd></div>
+              <div><dt>Salvage points</dt><dd id="report-salvage"></dd></div>
+              <div><dt>Clear time</dt><dd id="report-time"></dd></div>
+              <div><dt>Time bonus</dt><dd id="report-bonus"></dd></div>
+              <div class="report-total"><dt>Stage score</dt><dd id="report-total"></dd></div>
+            </dl>
+            <div class="dialog-buttons">
+              <button id="dialog-action" class="action" type="button"></button>
+              <button id="home" class="quiet" type="button">Hangar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="controls">
+        <div class="key-controls"><span><kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd> Move</span><span><kbd>Space</kbd> Fire</span><span><kbd>Esc</kbd> Pause</span></div>
+        <div class="touch-controls">Drag to steer<span id="touch-instructions"> · Tap Fire</span></div>
+        <div class="loadout" aria-label="Ship loadout">
+          <span id="weapon-status" class="weapon"><i aria-hidden="true"></i><span id="fire-mode">Single shot</span></span>
+          <span class="equipment"><kbd>Z</kbd> Bombs <strong id="bomb-count">0</strong></span>
+          <span class="equipment"><kbd>X</kbd> Torpedoes <strong id="torpedo-count">0</strong></span>
+          <span class="equipment">Armor <strong id="plate-count">0</strong></span>
+          <span class="equipment installed-upgrade" id="double-status" hidden>Double shot</span>
+          <span class="equipment installed-upgrade" id="laser-status" hidden>Stronger lasers</span>
+          <span class="equipment installed-upgrade" id="engine-status" hidden>Engines +30%</span>
+        </div>
+        <div id="touch-actions" class="touch-actions" hidden>
+          <button id="touch-fire" class="quiet" type="button">Fire</button>
+          <button id="touch-bomb" class="quiet" type="button" disabled>Bomb</button>
+          <button id="touch-torpedo" class="quiet" type="button" disabled>Torpedo</button>
+        </div>
+      </footer>
+    </section>
+    <p class="attribution">A tribute to the original <a href="https://www.theforce.net/videogames/apps/xvstie/xvtiegame.asp">X-Wing vs TIE Fighter applet</a> by <strong>Tom Josephson (Antilles58)</strong>, with graphics by <strong>Kyle Stewart</strong>.</p>
+  </main>
+</body>
+</html>
