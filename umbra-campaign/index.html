@@ -6,8 +6,8 @@
   <meta name="theme-color" content="#111016">
   <meta name="description" content="A ten-stage formation shooter. Beat the par times, build your ship, and take down the Eventide Bastion.">
   <title>Umbra Campaign</title>
-  <script type="module" crossorigin src="./assets/index-TP-cbvw7.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-CquyCgj2.css">
+  <script type="module" crossorigin src="./assets/index-TNSBrMVk.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BLs5pZBC.css">
 </head>
 <body>
   <main class="console">
@@ -57,10 +57,10 @@
         </div>
         <div id="shop" class="shop" hidden>
           <header class="dock-heading">
-            <p class="eyebrow" id="dock-stage">Stage 1 cleared</p>
+            <p class="eyebrow" id="dock-stage">Stage 2 via Launch bay</p>
             <h2>Salvage dock</h2>
           </header>
-          <p id="dock-status" class="dock-status" aria-live="polite">Fly into a bay and hold position to dock.</p>
+          <p id="dock-status" class="dock-status" aria-live="polite"></p>
         </div>
         <template id="bay-template">
           <div class="bay">
@@ -69,7 +69,7 @@
           </div>
         </template>
 
-        <div id="dialog" class="overlay" role="region" aria-labelledby="dialog-title" hidden>
+        <div id="dialog" class="overlay" role="region" aria-labelledby="dialog-title" aria-describedby="dialog-description" hidden>
           <div class="dialog">
             <p id="dialog-tag" class="eyebrow"></p>
             <h2 id="dialog-title"></h2>
@@ -83,7 +83,7 @@
             </dl>
             <div class="dialog-buttons">
               <button id="dialog-action" class="action" type="button"></button>
-              <button id="home" class="quiet" type="button">Hangar</button>
+              <button id="home" class="quiet" type="button" hidden>Back to title</button>
             </div>
           </div>
         </div>
