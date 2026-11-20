@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#111016">
   <meta name="description" content="A formation shooter. Beat the par times, build your ship, and fly beyond the Eventide Bastion.">
   <title>Umbra Campaign</title>
-  <script type="module" crossorigin src="./assets/index-BV_Gr0K8.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-BLs5pZBC.css">
+  <script type="module" crossorigin src="./assets/index-TkHrHW_h.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-DYOyWwBf.css">
 </head>
 <body>
-  <main class="console">
+<div class="console">
+  <main id="flight-deck" class="flight-deck">
     <header class="mast">
       <div class="brand"><span class="mark" aria-hidden="true"></span> Umbra <strong>Campaign</strong></div>
       <div class="tools">
@@ -60,27 +61,28 @@
             <p class="eyebrow" id="dock-stage">Stage 2 via Launch bay</p>
             <h2>Salvage dock</h2>
           </header>
-          <p id="dock-status" class="dock-status" aria-live="polite"></p>
         </div>
         <template id="bay-template">
-          <div class="bay">
+          <button class="bay" type="button">
             <span class="bay-icon" aria-hidden="true"></span>
             <strong></strong><span class="bay-detail"></span><i class="dock-meter" aria-hidden="true"></i>
-          </div>
+          </button>
         </template>
 
         <div id="dialog" class="overlay" role="region" aria-labelledby="dialog-title" aria-describedby="dialog-description" hidden>
           <div class="dialog">
-            <p id="dialog-tag" class="eyebrow"></p>
-            <h2 id="dialog-title"></h2>
-            <p id="dialog-description"></p>
-            <dl class="score-report" id="score-report" hidden>
-              <div><dt>Enemy points</dt><dd id="report-enemies"></dd></div>
-              <div><dt>Salvage points</dt><dd id="report-salvage"></dd></div>
-              <div><dt>Clear time</dt><dd id="report-time"></dd></div>
-              <div><dt>Time bonus</dt><dd id="report-bonus"></dd></div>
-              <div class="report-total"><dt>Stage score</dt><dd id="report-total"></dd></div>
-            </dl>
+            <div class="dialog-content">
+              <p id="dialog-tag" class="eyebrow"></p>
+              <h2 id="dialog-title"></h2>
+              <p id="dialog-description"></p>
+              <dl class="score-report" id="score-report" hidden>
+                <div><dt>Enemy points</dt><dd id="report-enemies"></dd></div>
+                <div><dt>Salvage points</dt><dd id="report-salvage"></dd></div>
+                <div><dt>Clear time</dt><dd id="report-time"></dd></div>
+                <div><dt>Time bonus</dt><dd id="report-bonus"></dd></div>
+                <div class="report-total"><dt>Stage score</dt><dd id="report-total"></dd></div>
+              </dl>
+            </div>
             <div class="dialog-buttons">
               <button id="dialog-action" class="action" type="button"></button>
               <button id="home" class="quiet" type="button" hidden>Back to title</button>
@@ -90,25 +92,27 @@
       </div>
 
       <footer class="controls">
+        <p id="dock-status" class="dock-status" aria-live="polite" hidden></p>
         <div class="key-controls"><span><kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd> Move</span><span><kbd>Space</kbd> Fire</span><span><kbd>Esc</kbd> Pause</span></div>
-        <div class="touch-controls">Drag to steer<span id="touch-instructions"> · Tap Fire</span></div>
         <div class="loadout" aria-label="Ship loadout">
           <span id="weapon-status" class="weapon"><i aria-hidden="true"></i><span id="fire-mode">Single shot</span></span>
-          <span class="equipment"><kbd>Z</kbd> Bombs <strong id="bomb-count">0</strong></span>
-          <span class="equipment"><kbd>X</kbd> Torpedoes <strong id="torpedo-count">0</strong></span>
+          <span class="equipment ammo"><kbd>Z</kbd> Bombs <strong id="bomb-count">0</strong></span>
+          <span class="equipment ammo"><kbd>X</kbd> Torpedoes <strong id="torpedo-count">0</strong></span>
           <span class="equipment">Armor <strong id="plate-count">0</strong></span>
           <span class="equipment installed-upgrade" id="double-status" hidden>Double shot</span>
           <span class="equipment installed-upgrade" id="laser-status" hidden>Stronger lasers</span>
           <span class="equipment installed-upgrade" id="engine-status" hidden>Engines +30%</span>
         </div>
         <div id="touch-actions" class="touch-actions" hidden>
-          <button id="touch-fire" class="quiet" type="button">Fire</button>
-          <button id="touch-bomb" class="quiet" type="button" disabled>Bomb</button>
-          <button id="touch-torpedo" class="quiet" type="button" disabled>Torpedo</button>
+          <div id="touch-steer" class="touch-pad" aria-hidden="true" data-label="Steer" data-detail="Drag"></div>
+          <button id="touch-bomb" class="quiet" type="button" aria-label="Bomb, 0 available" data-label="Bomb" data-detail="0" disabled></button>
+          <button id="touch-torpedo" class="quiet" type="button" aria-label="Torpedo, 0 available" data-label="Torpedo" data-detail="0" disabled></button>
+          <button id="touch-fire" class="quiet" type="button" aria-label="Fire, tap for a single shot" data-label="Fire" data-detail="Tap"></button>
         </div>
       </footer>
     </section>
-    <p class="attribution">A tribute to the original <a href="https://www.theforce.net/videogames/apps/xvstie/xvtiegame.asp">X-Wing vs TIE Fighter applet</a> by <strong>Tom Josephson (Antilles58)</strong>, with graphics by <strong>Kyle Stewart</strong>.</p>
   </main>
+  <p class="attribution">A tribute to the original <a href="https://www.theforce.net/videogames/apps/xvstie/xvtiegame.asp">X-Wing vs TIE Fighter applet</a> by <strong>Tom Josephson (Antilles58)</strong>, with graphics by <strong>Kyle Stewart</strong>.</p>
+</div>
 </body>
 </html>
